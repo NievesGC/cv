@@ -1,0 +1,151 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0);
+  transition: all $transition-normal;
+
+  &.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0);
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+  min-height: 70px;
+
+  &__logo {
+    a {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    &-text {
+      font-size: $font-size-lg;
+      font-weight: 700;
+      color: $color-secondary;
+      font-family: $font-secondary;
+    }
+
+    &-subtitle {
+      font-size: $font-size-xs;
+      color: $color-primary;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    list-style: none;
+    gap: $spacing-lg;
+    align-items: center;
+
+    @include respond-to('tablet') {
+      position: fixed;
+      top: 70px;
+      right: -100%;
+      flex-direction: column;
+      background-color: $color-bg-light;
+      width: 250px;
+      height: calc(100vh - 70px);
+      padding: $spacing-xl $spacing-lg;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transition: right $transition-normal;
+      align-items: flex-start;
+
+      &.active {
+        right: 0;
+      }
+    }
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $color-text-dark;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    position: relative;
+    padding: $spacing-xs 0;
+    transition: color $transition-fast;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, $color-primary, $color-accent);
+      transition: width $transition-normal;
+    }
+
+    &:hover {
+      color: $color-primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+
+    @include respond-to('tablet') {
+      font-size: $font-size-md;
+      padding: $spacing-sm 0;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: $spacing-xs;
+    z-index: 1001;
+
+    @include respond-to('tablet') {
+      display: flex;
+    }
+
+    span {
+      width: 28px;
+      height: 3px;
+      background-color: $color-secondary;
+      border-radius: 2px;
+      transition: all $transition-normal;
+    }
+
+    &.active {
+      span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      span:nth-child(2) {
+        opacity: 0;
+      }
+
+      span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+    }
+  }
+}

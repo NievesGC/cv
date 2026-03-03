@@ -1,0 +1,224 @@
+@import './variables';
+@import './mixins';
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Montserrat:wght@400;600;700&display=swap');
+
+// Reset y estilos globales
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-primary;
+  color: $color-text-dark;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-color: $color-bg-light;
+}
+
+// Contenedor principal
+.app {
+  position: relative;
+  overflow-x: hidden;
+}
+
+// Formas geométricas decorativas de fondo
+.geometric-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  
+  .shape {
+    position: absolute;
+    opacity: 0.15;
+    
+    &.hexagon-1 {
+      @include hexagon(200px, $color-primary);
+      top: 10%;
+      right: 10%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    &.hexagon-2 {
+      @include hexagon(150px, $color-tertiary);
+      bottom: 20%;
+      left: 5%;
+      animation: float 8s ease-in-out infinite 1s;
+    }
+    
+    &.triangle-1 {
+      @include triangle(180px, $color-accent, 'down');
+      top: 40%;
+      right: 15%;
+      animation: rotate 12s linear infinite;
+    }
+    
+    &.triangle-2 {
+      @include triangle(120px, $color-secondary, 'up');
+      bottom: 30%;
+      right: 25%;
+      animation: float 10s ease-in-out infinite 2s;
+    }
+  }
+}
+
+// Animaciones
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotate(5deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Utilidades
+.container {
+  @include container;
+}
+
+.section {
+  padding: $spacing-3xl 0;
+  position: relative;
+  
+  @include respond-to('tablet') {
+    padding: $spacing-2xl 0;
+  }
+  
+  @include respond-to('mobile') {
+    padding: $spacing-xl 0;
+  }
+}
+
+.section-title {
+  font-size: $font-size-2xl;
+  font-weight: 700;
+  color: $color-secondary;
+  margin-bottom: $spacing-xl;
+  text-align: center;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, $color-primary, $color-accent);
+    margin: $spacing-sm auto 0;
+    border-radius: 2px;
+  }
+  
+  @include respond-to('tablet') {
+    font-size: $font-size-xl;
+  }
+  
+  @include respond-to('mobile') {
+    font-size: $font-size-lg;
+  }
+}
+
+// Estilos de botones
+.btn {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all $transition-normal;
+  cursor: pointer;
+  border: 2px solid transparent;
+  font-size: $font-size-sm;
+  
+  &-primary {
+    background-color: $color-primary;
+    color: $color-text-dark;
+    
+    &:hover {
+      background-color: darken($color-primary, 10%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  &-outline {
+    background-color: transparent;
+    color: $color-primary;
+    border-color: $color-primary;
+    
+    &:hover {
+      background-color: $color-primary;
+      color: $color-text-dark;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Cards
+.card {
+  background-color: $color-bg-light;
+  border-radius: 12px;
+  padding: $spacing-lg;
+  box-shadow: $shadow-md;
+  transition: all $transition-normal;
+  
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-5px);
+  }
+}

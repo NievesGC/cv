@@ -1,0 +1,55 @@
+// Colores principales - basados en el diseño proporcionado
+$color-primary: #FDB913; // Amarillo/Dorado principal
+$color-secondary: #2C3E50; // Azul oscuro/Negro
+$color-tertiary: #3A5F7D; // Azul verdoso
+$color-accent: #E67E22; // Naranja acento
+
+// Colores de fondo
+$color-bg-dark: #1a1a1a;
+$color-bg-light: #ffffff;
+$color-bg-section: #f8f9fa;
+
+
+// Colores de texto
+$color-text-dark: #2C3E50;
+$color-text-light: #ffffff;
+$color-text-gray: #6c757d;
+
+// Tipografía
+$font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$font-secondary: 'Montserrat', 'Arial', sans-serif;
+
+// Tamaños de fuente
+$font-size-xs: 0.875rem;
+$font-size-sm: 1rem;
+$font-size-md: 1.125rem;
+$font-size-lg: 1.5rem;
+$font-size-xl: 2rem;
+$font-size-2xl: 2.5rem;
+$font-size-3xl: 3.5rem;
+
+// Espaciados
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 2rem;
+$spacing-xl: 3rem;
+$spacing-2xl: 4rem;
+$spacing-3xl: 6rem;
+
+// Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
+
+// Sombras
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+$shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
+
+// Transiciones
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;

@@ -1,0 +1,383 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+// ─────────────────────────────────────────────────────────
+// SECTION
+// ─────────────────────────────────────────────────────────
+.experience {
+  background-color: $color-bg-dark;
+}
+
+// ─────────────────────────────────────────────────────────
+// LAYOUT
+// Por defecto: columna centrada (solo tarjetas)
+// --open: fila → círculos a la izquierda, panel a la derecha
+// ─────────────────────────────────────────────────────────
+.experience__layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-2xl;
+  min-height: 200px;
+  transition: flex-direction 0.4s ease;
+
+  &--open {
+    flex-direction: row;
+    align-items: stretch;
+    gap: $spacing-2xl;
+  }
+
+  @include respond-to('mobile') {
+    &--open {
+      flex-direction: column;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// COLUMNA DE CARDS / CÍRCULOS
+// Por defecto: columna con ancho completo (tarjetas)
+// --side: columna estrecha a la izquierda (círculos)
+// ─────────────────────────────────────────────────────────
+.experience__cards {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  width: 60%;
+  // Timeline vertical
+  position: relative;
+  padding-left: 50px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, $color-primary, $color-accent);
+    transition: opacity 0.4s ease;
+  }
+
+  // Cuando hay panel abierto: se convierte en columna estrecha de círculos
+  &--side {
+    width: auto;
+    flex-shrink: 0;
+    padding-left: 0;
+    gap: $spacing-md;
+    justify-content: center;
+
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  @include respond-to('mobile') {
+    padding-left: 30px;
+
+    &::before {
+      left: 10px;
+    }
+
+    &--side {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-left: 0;
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// EXP-CARD — el elemento que hace morph de tarjeta a círculo
+// ─────────────────────────────────────────────────────────
+.exp-card {
+  --exp-color: #{$color-primary};
+
+  position: relative;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  text-align: left;
+
+  // ── Vista TARJETA (por defecto) ──
+  // Forma rectangular, ancho completo
+  width: 100%;
+  border-radius: 12px;
+  transition:
+    width       0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    height      0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow  0.3s ease;
+
+  // Contenido de la tarjeta visible, círculo oculto
+  .exp-card__rect {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    background: linear-gradient(135deg, $color-primary,20%, darken($color-secondary, 50%));
+    border-radius: 12px;
+    padding: $spacing-lg;
+    box-shadow: $shadow-md;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    position: relative;
+  }
+
+  .exp-card__circle-inner {
+    display: none;
+  }
+
+  &:hover .exp-card__rect {
+    box-shadow: $shadow-lg;
+    transform: translateY(-4px);
+  }
+
+  // Marcador del timeline
+  .exp-card__marker {
+    position: absolute;
+    left: -34px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    background-color: $color-primary;
+    border: 3px solid $color-bg-dark;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px $color-primary;
+    transition: opacity 0.3s ease;
+
+    @include respond-to('mobile') {
+      left: -24px;
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  // ── Vista CÍRCULO (cuando hay algo activo) ──
+  &--circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: $color-bg-light;
+    box-shadow:
+      0 0 0 2.5px rgba(255, 255, 255, 0.06),
+      0 6px 20px rgba(0, 0, 0, 0.3);
+
+    .exp-card__rect {
+      display: none;
+    }
+
+    .exp-card__circle-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      gap: 5px;
+      padding: $spacing-sm;
+    }
+
+    &:hover {
+      box-shadow:
+        0 0 0 3px var(--exp-color),
+        0 10px 28px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // ── Círculo ACTIVO ──
+  &--circle#{&}--active {
+    box-shadow:
+      0 0 0 3px var(--exp-color),
+      0 0 20px -4px var(--exp-color),
+      0 10px 32px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  // ── Contenido del círculo ──
+  &__circle-icon {
+    width: 44px;
+    height: 44px;
+    @include flex-center;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    span {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+  }
+
+  &__circle-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: $color-secondary;
+    text-align: center;
+    letter-spacing: 0.03em;
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__circle-period {
+    font-size: 0.54rem;
+    color: $color-text-gray;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  // ── Contenido de la tarjeta rectangular ──
+  &__icon {
+    width: 60px;
+    height: 60px;
+    background-color: $color-bg-section;
+    border-radius: 12px;
+    @include flex-center;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    span {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &__info {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-text-gray;
+    align-items: center;
+
+    .sep { opacity: 0.4; }
+  }
+
+  &__company {
+    font-weight: 700;
+    color: var(--exp-color);
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// PANEL DE DETALLE
+// ─────────────────────────────────────────────────────────
+.exp-detail {
+  --exp-color: #{$color-primary};
+
+  flex: 1;
+  background-color: $color-bg-light;
+  border-radius: 16px;
+  padding: $spacing-xl;
+  border-left: 4px solid var(--exp-color);
+  box-shadow: $shadow-md;
+  min-height: 320px;
+
+  @include respond-to('mobile') {
+    padding: $spacing-md;
+    border-left: none;
+    border-top: 4px solid var(--exp-color);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-xl;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: $color-bg-section;
+    @include flex-center;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+    }
+
+    span { font-size: $font-size-2xl; }
+  }
+
+  &__info { flex: 1; }
+
+  &__title {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $color-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $color-text-gray;
+
+    .sep { opacity: 0.4; }
+  }
+
+  &__company {
+    font-weight: 700;
+    color: var(--exp-color);
+  }
+
+  &__achievements {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__achievement {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-sm;
+    line-height: 1.65;
+    color: $color-text-gray;
+    font-size: $font-size-sm;
+  }
+
+  &__bullet {
+    color: var(--exp-color);
+    font-weight: bold;
+    font-size: $font-size-md;
+    flex-shrink: 0;
+    line-height: 1.65;
+  }
+}
