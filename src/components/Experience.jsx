@@ -8,10 +8,10 @@ import realcashIcon from '../assets/images/rc.webp';
 gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
-  const sectionRef   = useRef(null);
-  const detailRef    = useRef(null);
-  const cardRefs     = useRef([]);
-  const [active,    setActive]    = useState(null);
+  const sectionRef = useRef(null);
+  const detailRef = useRef(null);
+  const cardRefs = useRef([]);
+  const [active, setActive] = useState(null);
   const [displayed, setDisplayed] = useState(null);
 
   const experiences = [
@@ -64,15 +64,17 @@ const Experience = () => {
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
   useEffect(() => {
     cardRefs.current.forEach((el) => {
-      gsap.fromTo(el, 
-        {scrollTrigger: { trigger: el, start: 'top 80%' },
-        opacity: 0,
-        x: 50,
-        duration: 0.8,
-        ease: 'power3.out'}
+      gsap.fromTo(el,
+        {
+          scrollTrigger: { trigger: el, start: 'top 80%' },
+          opacity: 0,
+          x: 50,
+          duration: 0.8,
+          ease: 'power3.out'
+        }
         , { opacity: 1, x: 0 }
 
-        );
+      );
     });
   }, []);
 
@@ -112,23 +114,41 @@ const Experience = () => {
     // Micro-bounce en el elemento pulsado
     gsap.timeline()
       .to(cardRefs.current[index], { scale: 1.04, duration: 0.15, ease: 'power2.out' })
-      .to(cardRefs.current[index], { scale: 1,    duration: 0.2,  ease: 'back.out(2)' });
+      .to(cardRefs.current[index], { scale: 1, duration: 0.2, ease: 'back.out(2)' });
 
     if (active !== null) {
       closeDetail(() => {
         setActive(index);
         setDisplayed(index);
-        requestAnimationFrame(openDetail);
+        requestAnimationFrame(() => {
+          // Animar TODAS las tarjetas convirtiéndose en círculos
+          cardRefs.current.forEach((card, i) => {
+            gsap.fromTo(card,
+              { scale: 0.8, opacity: 0.5 },
+              { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
+            );
+          });
+          openDetail();
+        });
       });
     } else {
       setActive(index);
       setDisplayed(index);
-      requestAnimationFrame(openDetail);
+      requestAnimationFrame(() => {
+      // Lo mismo aquí
+      cardRefs.current.forEach((card, i) => {
+        gsap.fromTo(card,
+          { scale: 0.8, opacity: 0.5 },
+          { scale: 1, opacity: 1, duration: .4, delay: i * 0.08, ease: 'back.out(1.7)' }
+        );
+      });
+      openDetail();
+    });
     }
   };
 
-  const exp      = displayed !== null ? experiences[displayed] : null;
-  const isOpen   = active !== null;
+  const exp = displayed !== null ? experiences[displayed] : null;
+  const isOpen = active !== null;
 
   return (
     <section className="experience section" id="experience" ref={sectionRef}>
