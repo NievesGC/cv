@@ -11,6 +11,7 @@ const Experience = () => {
   const sectionRef = useRef(null);
   const detailRef = useRef(null);
   const cardRefs = useRef([]);
+  const cardRect = useRef(null);
   const [active, setActive] = useState(null);
   const [displayed, setDisplayed] = useState(null);
 
@@ -89,7 +90,7 @@ const Experience = () => {
     const items = el.querySelectorAll('.exp-detail__achievement');
     gsap.fromTo(items,
       { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
+      { opacity: 1, y: 0, duration: 3.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
     );
   };
 
@@ -97,8 +98,8 @@ const Experience = () => {
   const closeDetail = (onComplete) => {
     const el = detailRef.current;
     if (!el) { onComplete?.(); return; }
-    gsap.to(el, { opacity: 0, x: -20, duration: 0.25, ease: 'power2.in', onComplete });
-  };
+    gsap.to(el, { opacity: 0, x: -20, duration: 0.25, ease: 'power2.in', onComplete }); 
+    };
 
   // ── Click en una tarjeta / círculo ──
   const handleSelect = (index) => {
@@ -107,6 +108,14 @@ const Experience = () => {
       closeDetail(() => {
         setActive(null);
         setDisplayed(null);
+        requestAnimationFrame(() => {
+          cardRefs.current.forEach((card, i) => {
+            gsap.fromTo(card,
+              { scale: 0.8, opacity: 0.5 },
+              { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
+            );
+          });
+        });
       });
       return;
     }
@@ -121,10 +130,9 @@ const Experience = () => {
         setActive(index);
         setDisplayed(index);
         requestAnimationFrame(() => {
-          // Animar TODAS las tarjetas convirtiéndose en círculos
           cardRefs.current.forEach((card, i) => {
             gsap.fromTo(card,
-              { scale: 0.8, opacity: 0.5 },
+              { scale: 0.3, opacity: 0.5 },
               { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
             );
           });
@@ -135,15 +143,14 @@ const Experience = () => {
       setActive(index);
       setDisplayed(index);
       requestAnimationFrame(() => {
-      // Lo mismo aquí
-      cardRefs.current.forEach((card, i) => {
-        gsap.fromTo(card,
-          { scale: 0.8, opacity: 0.5 },
-          { scale: 1, opacity: 1, duration: .4, delay: i * 0.08, ease: 'back.out(1.7)' }
-        );
+        cardRefs.current.forEach((card, i) => {
+          gsap.fromTo(card,
+            { scale: 0.8, opacity: 0.5 },
+            { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
+          );
+        });
+        openDetail();
       });
-      openDetail();
-    });
     }
   };
 
@@ -169,7 +176,7 @@ const Experience = () => {
                 aria-label={`${ex.company} – ${ex.title}`}
               >
                 {/* Vista TARJETA (estado inicial) */}
-                <div className="exp-card__rect">
+                <div className="exp-card__rect" ref={cardRect}>
                   <div className="exp-card__marker" />
                   <div className="exp-card__icon">
                     {typeof ex.icon === 'string' && !ex.icon.includes('.webp') ? (
