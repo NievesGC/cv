@@ -88,10 +88,10 @@ const Experience = () => {
       { opacity: 1, x: 0, duration: 0.45, ease: 'power3.out' }
     );
     const items = el.querySelectorAll('.exp-detail__achievement');
-    gsap.fromTo(items,
+/*     gsap.fromTo(items,
       { opacity: 0, y: 14 },
       { opacity: 1, y: 0, duration: 3.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
-    );
+    ); */
   };
 
   // ── Cerrar panel ──
@@ -122,22 +122,14 @@ const Experience = () => {
 
     // Micro-bounce en el elemento pulsado
     gsap.timeline()
-      .to(cardRefs.current[index], { scale: 1.04, duration: 0.15, ease: 'power2.out' })
+      .to(cardRefs.current[index], { scale: 1.1, duration: 0.15, ease: 'power2.out' })
       .to(cardRefs.current[index], { scale: 1, duration: 0.2, ease: 'back.out(2)' });
 
     if (active !== null) {
       closeDetail(() => {
         setActive(index);
         setDisplayed(index);
-        requestAnimationFrame(() => {
-          cardRefs.current.forEach((card, i) => {
-            gsap.fromTo(card,
-              { scale: 0.3, opacity: 0.5 },
-              { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
-            );
-          });
-          openDetail();
-        });
+        requestAnimationFrame(openDetail) 
       });
     } else {
       setActive(index);
@@ -145,8 +137,8 @@ const Experience = () => {
       requestAnimationFrame(() => {
         cardRefs.current.forEach((card, i) => {
           gsap.fromTo(card,
-            { scale: 0.8, opacity: 0.5 },
-            { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
+            { scale: 0.5, opacity: 0.0 },
+            { scale: 1, opacity: 1, duration: 2.8, delay: i * 0.1, ease: 'back.out(4)' }
           );
         });
         openDetail();

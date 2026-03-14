@@ -8,73 +8,55 @@ const Hero = () => {
   const subtitleRef = useRef(null);
   const socialRef = useRef(null);
   const infoRef = useRef(null);
-  /* const descriptionRef = useRef(null); */
-  /* const buttonsRef = useRef(null); */
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    /*  let lastScroll = 0;
- 
-     const handleScroll = () => {
-       const current = window.scrollY;  // posición actual del scroll en px
- 
-       if (current > lastScroll && current > 80) {
-       gsap.to(bhHeroRef.current, {
-       opacity: 0,
-       y: -30,
-       duration: 0.5,
-       ease: 'power2.in',
-     });
-       } else if (current < lastScroll) {
-     // subiendo → aparece
-     gsap.to(bhHeroRef.current, {
-       opacity: 1,
-       y: 0,
-       duration: 0.5,
-       ease: 'power2.out',
-     });
-       }
- 
-       lastScroll = current;  // actualiza la posición anterior
-     };
- 
-     window.addEventListener('scroll', handleScroll); */
-
-
 
     tl.fromTo(titleRef.current,
       { opacity: 0, y: -60 },
       { opacity: 1, y: 80, duration: 1.2, ease: 'power4.out' }
     )
       .fromTo(subtitleRef.current,
-        { opacity: 0, y: -60 },
-        { opacity: 1, y: 80, duration: 1.2, ease: 'power4.out' }
-        , '-=0.01')
+        { opacity: 0, y: 80, x: -60 },
+        { opacity: 1, y: 80, x: 0, duration: 1.2, ease: 'power4.out' }
+        , '<')
 
-      .fromTo(socialRef.current.children,
-        { opacity: 0, y: 100, scale: 0 },
-        { opacity: 1, y: 200 ,scale: 1, duration: 0.6, ease: 'power1.out' }
-        )
-
-      .fromTo(infoRef.current.children,
+      .fromTo(socialRef.current,
         { opacity: 0, y: 150, scale: 0 },
-        { opacity: 1, y: 300 ,scale: 1, duration: 0.6, ease: 'power1.out' }
+        { opacity: 1, y: 200 ,scale: 1, duration: 1, ease: 'power1.out' }
+        , '<'
         )
-    /*  .fromTo(descriptionRef.current,
-       { opacity: 0, y: 0, scale: 0.2 },
-       { opacity: 1, y: 60, scale: 1, duration: 1.2, ease: 'power1.out' }
-       , '-=0.01') */
-    /* .fromTo(buttonsRef.current.children,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 30, duration: 1.2, ease: 'power1.out' }
-      , '-=0.2') */
 
+      .fromTo(infoRef.current,
+        { opacity: 0, y: 350, x : 150 },
+        { opacity: 1, y: 350 , x: 0, duration: 0.6, ease: 'power1.out' }
+        , '<'
+        )
 
-    /* return () => {
-     window.removeEventListener('scroll', handleScroll);
-   }; */        // cierra el return de limpieza
   }, []);
+  
+const handleMouseMove = (evt, i) => {
+  const rect = linkRefs.current[i].getBoundingClientRect();
+  const movX = evt.clientX - rect.x;
+
+  gsap.to(spotlightRefs.current[i], {
+    x: movX,
+    scale: 30,
+    duration: 0.3
+  });
+};
+
+const handleMouseLeave = (evt) => {
+  const rect = socialRef.current.getBoundingClientRect();
+  const movX = evt.clientX - rect.x;
+
+  gsap.to(spotlightRef.current, {
+    x: movX,
+    scale: 0,
+    duration: 0.3
+  });
+};
 
   const scrollToContact = (e) => {
     e.preventDefault();
@@ -100,11 +82,11 @@ const Hero = () => {
 
 
             <div className="hero__social" ref={socialRef}>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="hero__social-link">
+              <a onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} href="#" target="_blank" rel="noopener noreferrer" className="hero__social-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                 </svg>
-                <span>GitHub</span>
+                <span className="spotlight" >GitHub</span>
               </a>
               <a href="#" target="_blank" rel="noopener noreferrer" className="hero__social-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -120,22 +102,6 @@ const Hero = () => {
               </a>
             </div>
 
-            {/*   <p className="hero__description" ref={descriptionRef}>
-              He liderado equipos y gestionado operaciones comerciales de alto volumen durante más de 7 años.
-              Hoy aplico esa misma mentalidad al desarrollo web full-stack, con formación en JavaScript, React y Python.
-              Busco un rol como Junior Developer donde combinar visión de negocio, responsabilidad y capacidad de
-              ejecución con mi evolución técnica.
-            </p>
- */}
-            {/* <div className="hero__buttons" ref={buttonsRef}>
-              <a href="#contact" className="btn btn-primary" onClick={scrollToContact}>
-                Contáctame
-              </a>
-              <a href="#experience" className="btn btn-outline" onClick={scrollToProjects}>
-                Ver Experiencia
-              </a>
-            </div>
- */}
             <div className="hero__info" ref={infoRef}>
               <div className="hero__info-item">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

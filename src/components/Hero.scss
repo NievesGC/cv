@@ -151,13 +151,13 @@
         height: 20px;
       }
 
-      &:hover {
+     /*  &:hover {
         background-color: $color-primary;
         color: $color-text-dark;
         box-shadow: $shadow-md;
         transform: translateY(-3px);
       }
-
+ */
       @include respond-to('mobile') {
         span {
           display: none;
