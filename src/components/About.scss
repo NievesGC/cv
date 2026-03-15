@@ -1,2 +1,66 @@
-/* @import '../styles/variables';
-@import '../styles/mixins'; */
+
+@import '../styles/variables';
+@import '../styles/mixins';
+
+
+.about {
+  padding: 10vh 5vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: auto;
+  max-height: 90vh;
+  min-width: 100vw;      
+  overflow: hidden; 
+  background-color: $color-primary;
+
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+    position: relative; 
+    z-index: 1;
+  }
+
+    &__title {
+      font-size: $font-size-3xl;
+      font-weight: 700;
+      margin-bottom: $spacing-md;
+      color: $color-secondary;
+      font-family: $font-secondary;
+      line-height: 1.2;
+  }
+
+  &__image {
+    width: 40%;
+    height: auto;        
+    display: block;     
+    will-change: transform;  
+    margin-bottom: $spacing-md;
+  }
+
+
+  &__description {
+    will-change: transform;
+    font-size: $font-size-lg;
+    line-height: 1.8;
+    color: $color-text-dark;
+  }
+
+
+  @include respond-to('tablet') {
+    &__item {
+      grid-template-columns: 1fr;
+      margin-bottom: 10vh;
+
+      &:nth-child(even) {
+        direction: ltr;
+      }
+    }
+
+    &__image-wrap {
+      aspect-ratio: 16/9;
+    }
+  }
+}
