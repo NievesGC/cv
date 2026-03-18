@@ -15,6 +15,10 @@ $color-text-dark: #2C3E50;
 $color-text-light: #ffffff;
 $color-text-gray: #6c757d;
 
+:root {
+  --color-bg-dark: #{$color-bg-dark};
+}
+
 // Tipografía
 $font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $font-secondary: 'Montserrat', 'Arial', sans-serif;

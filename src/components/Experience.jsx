@@ -51,7 +51,7 @@ const Experience = () => {
       period: '2016 – 2023',
       location: 'Madrid',
       icon: realcashIcon,
-      color: '#34d399',
+      color: '#dd650f',
       achievements: [
         'Liderazgo de equipo de 5 personas con responsabilidad en formación y desarrollo',
         'Gestión de operaciones anuales de hasta €3M',
@@ -88,26 +88,43 @@ const Experience = () => {
       { opacity: 1, x: 0, duration: 0.45, ease: 'power3.out' }
     );
     const items = el.querySelectorAll('.exp-detail__achievement');
-/*     gsap.fromTo(items,
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 3.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
-    ); */
+    /*     gsap.fromTo(items,
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 3.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
+        ); */
   };
 
   // ── Cerrar panel ──
   const closeDetail = (onComplete) => {
     const el = detailRef.current;
     if (!el) { onComplete?.(); return; }
-    gsap.to(el, { opacity: 0, x: -20, duration: 0.25, ease: 'power2.in', onComplete }); 
-    };
+    gsap.to(el, { opacity: 0, x: -20, duration: 0.25, ease: 'power2.in', onComplete });
+  };
 
+
+  // ── Cambiar color de fondo de la sección ──
+  const animateBg = (color) => {
+    gsap.to(sectionRef.current, {
+      backgroundColor: color,
+      duration: 0.6,
+      ease: 'power2.inOut',
+    });
+  };
   // ── Click en una tarjeta / círculo ──
   const handleSelect = (index) => {
+
+    const bgDefault = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-bg-dark').trim();
+
+    console.log('bgDefault vale:', bgDefault); // ← añade esto
+    animateBg(bgDefault);
+
     // Deseleccionar: volver al estado de tarjetas
     if (active === index) {
       closeDetail(() => {
         setActive(null);
         setDisplayed(null);
+        animateBg('$color-bg-dark');
         requestAnimationFrame(() => {
           cardRefs.current.forEach((card, i) => {
             gsap.fromTo(card,
@@ -125,11 +142,13 @@ const Experience = () => {
       .to(cardRefs.current[index], { scale: 1.1, duration: 0.15, ease: 'power2.out' })
       .to(cardRefs.current[index], { scale: 1, duration: 0.2, ease: 'back.out(2)' });
 
+    animateBg(experiences[index].color + '52');
+
     if (active !== null) {
       closeDetail(() => {
         setActive(index);
         setDisplayed(index);
-        requestAnimationFrame(openDetail) 
+        requestAnimationFrame(openDetail)
       });
     } else {
       setActive(index);

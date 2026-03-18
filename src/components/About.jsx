@@ -13,9 +13,42 @@ const About = () => {
     const imageRef = useRef(null);
     const desc1Ref = useRef(null);
     const desc2Ref = useRef(null);
+    const blindOverlayRef = useRef(null);
 
 
     useEffect(() => {
+
+        // --- PERSIANAS FUERA DEL CONTEXTO ---
+        const overlay = blindOverlayRef.current;
+        const numBlinds = 20;
+        overlay.innerHTML = '';
+
+        for (let i = 0; i < numBlinds; i++) {
+            const blind = document.createElement('div');
+            blind.className = 'about__blind';
+            blind.style.width = `${100 / numBlinds}%`;
+            blind.style.left = `${i * (100 / numBlinds)}%`;
+            overlay.appendChild(blind);
+        }
+
+        const blinds = overlay.querySelectorAll('.about__blind');
+
+        const blindAnimation = gsap.fromTo(
+            blinds,
+            { scaleX: 1 },
+            {
+                scaleX: 0,
+                stagger: { each: 0.1, ease: 'power2.inOut' },
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 80%',
+                    end: 'top 30%',
+                    scrub: 1,
+                },
+            }
+        );
+
         const ctx = gsap.context(() => {
 
             gsap.fromTo(imageRef.current,
@@ -23,7 +56,7 @@ const About = () => {
                 {
                     x: 0,
                     opacity: 1,
-                    duration: 1,
+                    duration: 1.5,
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: imageRef.current,
@@ -83,7 +116,7 @@ const About = () => {
                             duration: 1,
                             ease: 'power3.out',
                             scrollTrigger: {
-                                trigger: descRef.current,  
+                                trigger: descRef.current,
                                 start: 'top 70%',
                                 toggleActions: 'play none none reverse'
                             },
@@ -100,8 +133,8 @@ const About = () => {
                             stagger: 0.03,
                             ease: 'power2.in',
                             scrollTrigger: {
-                                trigger: descRef.current,  
-                                start: 'bottom 60%',
+                                trigger: descRef.current,
+                                start: 'bottom 40%',
                                 toggleActions: 'play none none reverse'
                             }
                         });
@@ -128,6 +161,8 @@ const About = () => {
                     </p></div>
                 <img className='about__image' src={AboutImg} ref={imageRef} alt="dibujo nieves gomez" />
             </div>
+
+            <div className="about__blind-overlay" ref={blindOverlayRef}></div>
         </section>
     );
 };

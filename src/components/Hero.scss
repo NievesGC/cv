@@ -120,6 +120,13 @@
       color: $color-text-dark;
       font-size: $font-size-sm;
 
+      &:hover {
+        color: $color-primary;
+        transition-duration: 0.7s;
+        opacity: 0.7;
+      }
+
+
       .icon {
         font-size: $font-size-lg;
       }
@@ -171,7 +178,7 @@
         pointer-events: none; // ← que no interfiera con los eventos del ratón
         z-index: 0;
       }
-  
+
 
       @include respond-to('mobile') {
         span {

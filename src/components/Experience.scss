@@ -6,6 +6,7 @@
 // ─────────────────────────────────────────────────────────
 .experience {
   background-color: $color-bg-dark;
+  transition: background-color 0.6s ease;
 }
 
 // ─────────────────────────────────────────────────────────
@@ -288,14 +289,9 @@
 // ─────────────────────────────────────────────────────────
 .exp-detail {
   --exp-color: #{$color-primary};
-
   flex: 1;
-  background-color: $color-bg-light;
-  border-radius: 16px;
   padding: $spacing-xl;
-  border-left: 4px solid var(--exp-color);
-  box-shadow: $shadow-md;
-  min-height: 320px;
+  min-height: 70vh;
 
   @include respond-to('mobile') {
     padding: $spacing-md;
