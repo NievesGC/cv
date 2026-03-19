@@ -134,7 +134,7 @@ const About = () => {
                             ease: 'power2.in',
                             scrollTrigger: {
                                 trigger: descRef.current,
-                                start: 'bottom 40%',
+                                start: 'bottom 30%',
                                 toggleActions: 'play none none reverse'
                             }
                         });

@@ -8,10 +8,10 @@ import realcashIcon from '../assets/images/rc.webp';
 gsap.registerPlugin(ScrollTrigger);
 
 const Experience = () => {
+  const imageRef = useRef(null)
   const sectionRef = useRef(null);
   const detailRef = useRef(null);
   const cardRefs = useRef([]);
-  const cardRect = useRef(null);
   const [active, setActive] = useState(null);
   const [displayed, setDisplayed] = useState(null);
 
@@ -67,13 +67,17 @@ const Experience = () => {
     cardRefs.current.forEach((el) => {
       gsap.fromTo(el,
         {
-          scrollTrigger: { trigger: el, start: 'top 80%' },
           opacity: 0,
-          x: 50,
-          duration: 0.8,
-          ease: 'power3.out'
+          x: 100,
         }
-        , { opacity: 1, x: 0 }
+        , {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 80%',
+            end: 'top 30%',
+            scrub: 1
+          }, opacity: 1, x: 0
+        }
 
       );
     });
@@ -82,23 +86,26 @@ const Experience = () => {
   // ── Abrir panel de detalle ──
   const openDetail = () => {
     const el = detailRef.current;
+    const items = el.querySelectorAll('.exp-detail__achievement');
     if (!el) return;
     gsap.fromTo(el,
       { opacity: 0, x: 50 },
       { opacity: 1, x: 0, duration: 0.45, ease: 'power3.out' }
     );
-    const items = el.querySelectorAll('.exp-detail__achievement');
-    /*     gsap.fromTo(items,
-          { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 3.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
-        ); */
+    gsap.fromTo(items,
+      { opacity: 0, x: 14 },
+      { opacity: 1, x: 0, duration: 1.35, stagger: 0.07, ease: 'power2.out', delay: 0.2 }
+    );
+
   };
+
 
   // ── Cerrar panel ──
   const closeDetail = (onComplete) => {
     const el = detailRef.current;
     if (!el) { onComplete?.(); return; }
-    gsap.to(el, { opacity: 0, x: -20, duration: 0.25, ease: 'power2.in', onComplete });
+    gsap.to(el, { opacity: 0, x: -50, duration: 0.5, ease: 'power2.in', onComplete });
+
   };
 
 
@@ -110,59 +117,86 @@ const Experience = () => {
       ease: 'power2.inOut',
     });
   };
+
   // ── Click en una tarjeta / círculo ──
   const handleSelect = (index) => {
-
     const bgDefault = getComputedStyle(document.documentElement)
       .getPropertyValue('--color-bg-dark').trim();
 
-    console.log('bgDefault vale:', bgDefault); // ← añade esto
-    animateBg(bgDefault);
+    // ── Función: animar tarjetas saliendo (rect → fuera) ──
+    const animateCardsOut = (onComplete) => {
+      const tl = gsap.timeline({ onComplete });
+      cardRefs.current.forEach((card, i) => {
+        tl.to(card, {
+          scale: 0.6,
+          opacity: 0,
+          duration: 0.25,
+          ease: 'power2.in',
+        }, i * 0.05); // ← cada tarjeta empieza 0.05s después de la anterior
+      });
+    };
 
-    // Deseleccionar: volver al estado de tarjetas
+    // ── Función: animar círculos entrando ──
+    const animateCirclesIn = () => {
+      cardRefs.current.forEach((card, i) => {
+        gsap.fromTo(card,
+          { scale: 0, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.5, delay: i * 0.08, ease: 'back.out(1.7)' }
+        );
+      });
+    };
+
+    // ── CASO 1: Deseleccionar (clic en el círculo ya activo) ──
     if (active === index) {
       closeDetail(() => {
-        setActive(null);
-        setDisplayed(null);
-        animateBg('$color-bg-dark');
-        requestAnimationFrame(() => {
-          cardRefs.current.forEach((card, i) => {
-            gsap.fromTo(card,
-              { scale: 0.8, opacity: 0.5 },
-              { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
-            );
+        animateCardsOut(() => {
+          setActive(null);
+          setDisplayed(null);
+          animateBg(bgDefault);
+          requestAnimationFrame(() => {
+            cardRefs.current.forEach((card, i) => {
+              gsap.fromTo(card,
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
+              );
+            });
           });
+        })
+          
+      });
+      return;
+    }
+
+    // ── CASO 2: Primera selección (venimos del estado inicial, tarjetas en rect) ──
+    if (active === null) {
+      animateCardsOut(() => {
+        // Solo cuando terminan de salir, React cambia el estado
+        setActive(index);
+        setDisplayed(index);
+        animateBg(experiences[index].color + '52');
+
+        requestAnimationFrame(() => {
+          // Ahora el DOM ya tiene las clases --circle, las animamos entrando
+          animateCirclesIn();
+          openDetail();
         });
       });
       return;
     }
 
-    // Micro-bounce en el elemento pulsado
+    // ── CASO 3: Cambio entre círculos (ya hay uno activo) ──
+    // Micro-bounce en el pulsado + cambio de color + swap del panel de detalle
     gsap.timeline()
       .to(cardRefs.current[index], { scale: 1.1, duration: 0.15, ease: 'power2.out' })
       .to(cardRefs.current[index], { scale: 1, duration: 0.2, ease: 'back.out(2)' });
 
     animateBg(experiences[index].color + '52');
 
-    if (active !== null) {
-      closeDetail(() => {
-        setActive(index);
-        setDisplayed(index);
-        requestAnimationFrame(openDetail)
-      });
-    } else {
+    closeDetail(() => {
       setActive(index);
       setDisplayed(index);
-      requestAnimationFrame(() => {
-        cardRefs.current.forEach((card, i) => {
-          gsap.fromTo(card,
-            { scale: 0.5, opacity: 0.0 },
-            { scale: 1, opacity: 1, duration: 2.8, delay: i * 0.1, ease: 'back.out(4)' }
-          );
-        });
-        openDetail();
-      });
-    }
+      requestAnimationFrame(openDetail);
+    });
   };
 
   const exp = displayed !== null ? experiences[displayed] : null;
@@ -171,6 +205,7 @@ const Experience = () => {
   return (
     <section className="experience section" id="experience" ref={sectionRef}>
       <div className="container">
+
         <h2 className="section-title">Experiencia Profesional</h2>
 
         <div className={`experience__layout ${isOpen ? 'experience__layout--open' : ''}`}>
@@ -187,7 +222,7 @@ const Experience = () => {
                 aria-label={`${ex.company} – ${ex.title}`}
               >
                 {/* Vista TARJETA (estado inicial) */}
-                <div className="exp-card__rect" ref={cardRect}>
+                <div className="exp-card__rect" >
                   <div className="exp-card__marker" />
                   <div className="exp-card__icon">
                     {typeof ex.icon === 'string' && !ex.icon.includes('.webp') ? (
@@ -232,13 +267,13 @@ const Experience = () => {
               style={{ '--exp-color': exp.color }}
             >
               <div className="exp-detail__header">
-                <div className="exp-detail__icon">
+                {/*              <div className="exp-detail__icon">
                   {typeof exp.icon === 'string' && !exp.icon.includes('.webp') ? (
                     <span>{exp.icon}</span>
                   ) : (
                     <img src={exp.icon} alt={exp.company} />
                   )}
-                </div>
+                </div> */}
                 <div className="exp-detail__info">
                   <h3 className="exp-detail__title">{exp.title}</h3>
                   <div className="exp-detail__meta">
@@ -249,6 +284,8 @@ const Experience = () => {
                     <span>{exp.location}</span>
                   </div>
                 </div>
+
+
               </div>
 
               <ul className="exp-detail__achievements">
@@ -259,7 +296,16 @@ const Experience = () => {
                   </li>
                 ))}
               </ul>
+
+              <div ref={imageRef} className='image-bg__section'>
+                {typeof exp.icon === 'string' && !exp.icon.includes('.webp') ? (
+                  <span>{exp.icon}</span>
+                ) : (
+                  <img src={exp.icon} alt={exp.company} />
+                )}
+              </div>
             </div>
+
           )}
 
         </div>
