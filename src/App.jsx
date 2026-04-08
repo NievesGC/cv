@@ -11,12 +11,12 @@ function App() {
   return (
     <div className="app">
       {/* Formas geométricas decorativas de fondo */}
-      <div className="geometric-shapes">
+{/*       <div className="geometric-shapes">
         <div className="shape hexagon-1"></div>
         <div className="shape hexagon-2"></div>
         <div className="shape triangle-1"></div>
         <div className="shape triangle-2"></div>
-      </div>
+      </div> */}
 
       {/* Navegación */}
       <Header />

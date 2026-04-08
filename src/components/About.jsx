@@ -129,7 +129,7 @@ const About = () => {
                             opacity: 0,
                             rotationY: () => gsap.utils.random(-40, 40),
                             rotationX: () => gsap.utils.random(-20, 20),
-                            duration: 0.4,
+                            duration: 0.2,
                             stagger: 0.03,
                             ease: 'power2.in',
                             scrollTrigger: {

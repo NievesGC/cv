@@ -62,7 +62,7 @@
   position: relative;
   padding-left: 50px;
 
-  &::before {
+/*   &::before {
     content: '';
     position: absolute;
     left: 20px;
@@ -72,7 +72,7 @@
     background: linear-gradient(180deg, $color-primary, $color-accent);
     transition: opacity 0s ease;
   }
-
+ */
   // Cuando hay panel abierto: se convierte en columna estrecha de círculos
   &--side {
     width: auto;

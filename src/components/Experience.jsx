@@ -60,6 +60,7 @@ const Experience = () => {
         'Gestión de relaciones con clientes en situaciones complejas',
       ],
     },
+    
   ];
 
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
