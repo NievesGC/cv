@@ -28,7 +28,7 @@
 // ─────────────────────────────────────────────────────────
 .experience__layout {
   display: flex;
-  flex-direction: column;
+  flex-direction: flex-start;
   align-items: center;
   gap: $spacing-2xl;
   min-height: 200px;
@@ -56,11 +56,10 @@
 .experience__cards {
   display: flex;
   flex-direction: column;
+  align-content: flex-start;
   gap: $spacing-lg;
-  width: 60%;
-  // Timeline vertical
-  position: relative;
-  padding-left: 50px;
+  width: 50%;
+
 
 /*   &::before {
     content: '';
@@ -148,26 +147,6 @@
     transform: translateY(-4px);
   }
 
-  // Marcador del timeline
-  .exp-card__marker {
-    position: absolute;
-    left: -34px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 15px;
-    height: 15px;
-    background-color: $color-primary;
-    border: 3px solid $color-bg-dark;
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px $color-primary;
-    /* transition: opacity 0.3s ease; */
-
-    @include respond-to('mobile') {
-      left: -24px;
-      width: 12px;
-      height: 12px;
-    }
-  }
 
   // ── Vista CÍRCULO (cuando hay algo activo) ──
   &--circle {

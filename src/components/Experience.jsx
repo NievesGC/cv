@@ -224,7 +224,6 @@ const Experience = () => {
               >
                 {/* Vista TARJETA (estado inicial) */}
                 <div className="exp-card__rect" >
-                  <div className="exp-card__marker" />
                   <div className="exp-card__icon">
                     {typeof ex.icon === 'string' && !ex.icon.includes('.webp') ? (
                       <span>{ex.icon}</span>
