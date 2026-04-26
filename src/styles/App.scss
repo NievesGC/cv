@@ -30,50 +30,7 @@ body {
   overflow-x: hidden;
 }
 
-// Formas geométricas decorativas de fondo
-.geometric-shapes {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  
-  .shape {
-    position: absolute;
-    opacity: 0.15;
-    
-    &.hexagon-1 {
-      @include hexagon(200px, $color-primary);
-      top: 10%;
-      right: 10%;
-      animation: float 6s ease-in-out infinite;
-    }
-    
-    &.hexagon-2 {
-      @include hexagon(150px, $color-tertiary);
-      bottom: 20%;
-      left: 5%;
-      animation: float 8s ease-in-out infinite 1s;
-    }
-    
-    &.triangle-1 {
-      @include triangle(180px, $color-accent, 'down');
-      top: 40%;
-      right: 15%;
-      animation: rotate 12s linear infinite;
-    }
-    
-    &.triangle-2 {
-      @include triangle(120px, $color-secondary, 'up');
-      bottom: 30%;
-      right: 25%;
-      animation: float 10s ease-in-out infinite 2s;
-    }
-  }
-}
+
 
 // Animaciones
 @keyframes float {
