@@ -5,7 +5,7 @@
 // SECTION
 // ─────────────────────────────────────────────────────────
 
-.image-bg__section{
+.image-bg__section {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -13,7 +13,7 @@
   width: 300px;
   height: 300px;
   opacity: 0.5;
-  filter: drop-shadow(15px 15px 15px rgba(0,0,0,0.5));
+  filter: drop-shadow(15px 15px 15px rgba(0, 0, 0, 0.5));
 }
 
 .experience {
@@ -61,7 +61,7 @@
   width: 50%;
 
 
-/*   &::before {
+  /*   &::before {
     content: '';
     position: absolute;
     left: 20px;
@@ -101,6 +101,13 @@
   }
 }
 
+.habilities {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 5rem;
+}
+
 // ─────────────────────────────────────────────────────────
 // EXP-CARD — el elemento que hace morph de tarjeta a círculo
 // ─────────────────────────────────────────────────────────
@@ -119,7 +126,8 @@
   // Forma rectangular, ancho completo
   width: 100%;
   border-radius: 12px;
- /*  transition:
+
+  /*  transition:
     width       1.45s cubic-bezier(0.4, 0, 0.2, 1),
     height      1.45s cubic-bezier(0.4, 0, 0.2, 1),
     border-radius 1.45s cubic-bezier(0.4, 0, 0.2, 1),
@@ -130,7 +138,7 @@
     display: flex;
     align-items: center;
     gap: $spacing-md;
-    background: linear-gradient(135deg, $color-primary,20%, darken($color-secondary, 50%));
+    background: linear-gradient(135deg, $color-primary, 20%, darken($color-secondary, 50%));
     border-radius: 12px;
     padding: $spacing-lg;
     box-shadow: $shadow-md;
@@ -267,7 +275,9 @@
     color: $color-text-gray;
     align-items: center;
 
-    .sep { opacity: 0.4; }
+    .sep {
+      opacity: 0.4;
+    }
   }
 
   &__company {
@@ -279,12 +289,15 @@
 // ─────────────────────────────────────────────────────────
 // PANEL DE DETALLE
 // ─────────────────────────────────────────────────────────
+
+
+
 .exp-detail {
   --exp-color: #{$color-primary};
   flex: 1;
   padding: $spacing-xl;
   min-height: 70vh;
- 
+
 
   @include respond-to('mobile') {
     padding: $spacing-md;
@@ -316,10 +329,14 @@
       padding: 8px;
     }
 
-    span { font-size: $font-size-2xl; }
+    span {
+      font-size: $font-size-2xl;
+    }
   }
 
-  &__info { flex: 1; }
+  &__info {
+    flex: 1;
+  }
 
   &__title {
     font-size: $font-size-lg;
@@ -336,7 +353,9 @@
     font-size: $font-size-sm;
     color: $color-text-gray;
 
-    .sep { opacity: 0.4; }
+    .sep {
+      opacity: 0.4;
+    }
   }
 
   &__company {

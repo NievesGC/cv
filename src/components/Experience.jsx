@@ -12,6 +12,7 @@ const Experience = () => {
   const sectionRef = useRef(null);
   const detailRef = useRef(null);
   const cardRefs = useRef([]);
+  const habilitiesRefs = useRef([]);
   const [active, setActive] = useState(null);
   const [displayed, setDisplayed] = useState(null);
 
@@ -60,7 +61,19 @@ const Experience = () => {
         'Gestión de relaciones con clientes en situaciones complejas',
       ],
     },
-    
+
+  ];
+
+  const habilities = [
+    { text: 'Trabajo Bajo Presión', size: 20, align: 'flex-start' },
+    { text: 'Planificación Estratégica', size: 18, align: 'flex-end' },
+    { text: 'Liderazgo de Equipos', size: 14, align: 'center' },
+    { text: 'Comunicación Efectiva', size: 32, align: 'flex-start' },
+    { text: 'Toma de Decisiones', size: 18, align: 'flex-end' },
+    { text: 'Análisis de Datos', size: 24, align: 'flex-start' },
+    { text: "Resolución de Problemas", size: 26, align: "center" },
+    { text: "Gestión Operativa", size: 16, align: "flex-start" },
+    { text: "Gestión Operativa", size: 30, align: "center" },
   ];
 
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
@@ -137,6 +150,14 @@ const Experience = () => {
       });
     };
 
+    const animateHabilitiesOut = (onComplete) => {
+      const tl = gsap.timeline({ onComplete });
+
+      gsap.to(habilitiesRefs.current,
+        { opacity: 0 }
+      );
+    };
+
     // ── Función: animar círculos entrando ──
     const animateCirclesIn = () => {
       cardRefs.current.forEach((card, i) => {
@@ -151,6 +172,7 @@ const Experience = () => {
     if (active === index) {
       closeDetail(() => {
         animateCardsOut(() => {
+          
           setActive(null);
           setDisplayed(null);
           animateBg(bgDefault);
@@ -163,7 +185,7 @@ const Experience = () => {
             });
           });
         })
-          
+
       });
       return;
     }
@@ -192,6 +214,8 @@ const Experience = () => {
       .to(cardRefs.current[index], { scale: 1, duration: 0.2, ease: 'back.out(2)' });
 
     animateBg(experiences[index].color + '52');
+
+    
 
     closeDetail(() => {
       setActive(index);
@@ -258,7 +282,23 @@ const Experience = () => {
               </button>
             ))}
           </div>
+          <div className='habilities' ref={habilities}>
+            {habilities.map(({ text, size, align }) => (
+              <div
+                key={text}
+                style={{
+                  display: "flex",
+                  justifyContent: align,  // controla si va a izq, centro o derecha
+                }}
+              >
+                <span style={{ fontSize: `${size}px` }}>
+                  {text}
+                </span>
+              </div>
+            ))
+            }
 
+          </div>
           {/* ── PANEL DE DETALLE (derecha) ── */}
           {exp && (
             <div
@@ -266,6 +306,11 @@ const Experience = () => {
               ref={detailRef}
               style={{ '--exp-color': exp.color }}
             >
+              {/* ── Vista inicio - habilidades profesionales ── */}
+
+
+
+              {/* ── Vista seleccionado ── */}
               <div className="exp-detail__header">
                 {/*              <div className="exp-detail__icon">
                   {typeof exp.icon === 'string' && !exp.icon.includes('.webp') ? (
