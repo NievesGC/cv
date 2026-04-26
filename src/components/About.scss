@@ -1,34 +1,44 @@
 @import '../styles/variables';
 @import '../styles/mixins';
 
+.image {
+  position: absolute;
+  bottom: 0;
+  left: -250px;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom left;
+  z-index: 1;
+}
 
 .about {
-  padding: 10vh 5vw;
+  /* padding: 10vh 10vw; */
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: auto;
-  max-height: 110vh;
+  min-height: 100vh;
+  max-height: 120vh;
   min-width: 100vw;
-  overflow: hidden;
+  overflow: visiblen;
   background-color: $color-primary;
 
-  &__container {
+  /*  &__container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
+    align-items: flex-start; // cambia: la imagen y el timeline se alinean arriba
+    justify-content: flex-end;
+    margin: 0 2rem 0 auto;
     gap: 2rem;
-    width: 100%;
+    width: 90%;
     min-height: 400px;
     position: relative;
     z-index: 1;
   }
+ */
 
-
-
+  /* 
   &__title {
     font-size: $font-size-2xl;
     font-weight: 700;
@@ -36,35 +46,109 @@
     color: $color-secondary;
     font-family: $font-secondary;
     line-height: 1.2;
+    z-index: 2;
   }
-
-  &__image {
-    width: 30%;
-    height: auto;
-    display: block;
-    align-self: center;
-    will-change: transform;
-   
-  }
+ */
 
 
   &__description {
     will-change: transform;
     font-size: $font-size-md;
     line-height: 1.8;
-    color: $color-text-dark;
+    color: $color-text-light;
   }
 
-  &__profile {
+  &__desc-card {
+    background-color: rgba(44, 62, 80, 0.88); // $color-secondary con opacidad
+    border-radius: 1.2rem;
+    padding: $spacing-lg $spacing-xl;
+    width: 65%;
+    max-width: 800px;
+    margin: $spacing-md 2rem $spacing-md auto;
+    text-align: center;
+    z-index: 2;
+  }
+
+  // Timeline de formación
+  &__timeline {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 50%;
-    align-self: stretch; 
-    max-width: 400px;
+    gap: $spacing-md;
+    width: 55%;
+    max-width: 700px;
+    margin: 0 2rem 0 auto;
+    padding: $spacing-md;
+    background-color: rgba(44, 62, 80, 0.75);
+    border-radius: 1.2rem;
+    z-index: 2;
   }
 
+  &__timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    border-left: 3px solid $color-primary; // línea vertical dorada
+    padding-left: $spacing-md;
+    z-index: 2;
 
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        color: $color-text-light;
+        font-size: $font-size-sm;
+        line-height: 1.8;
+
+        // El triángulo ▶ delante de cada item
+        &::before {
+          content: '▶';
+          color: $color-primary;
+          margin-right: $spacing-xs;
+          font-size: 0.7rem;
+        }
+      }
+
+      .about__sublist li::before {
+        content: ''; // 👈 vacía el triángulo para estos li
+      }
+    }
+  }
+
+  &__year {
+    min-width: 90px;
+    font-weight: 700;
+    font-size: $font-size-sm;
+    color: $color-text-gray;
+    padding-top: 0.2rem;
+
+    // El año "Actualidad" va en dorado
+    &.current {
+      color: $color-primary;
+    }
+  }
+
+  &__school {
+    color: $color-primary; // el nombre de la escuela en dorado
+    font-size: $font-size-xs;
+  }
+
+  @include respond-to('desktop') {
+    &__container {
+      align-items: center; // centra verticalmente imagen y timeline
+    }
+
+    &__image {
+      width: 30%; // un poco más pequeña en pantallas grandes
+    }
+
+    &__timeline {
+      width: 45%; // el timeline ocupa más espacio
+    }
+  }
+
+  // Animaciones
   @include respond-to('tablet') {
     &__item {
       grid-template-columns: 1fr;

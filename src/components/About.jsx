@@ -12,6 +12,7 @@ const About = () => {
     const titleRef = useRef(null);
     const imageRef = useRef(null);
     const descRef = useRef(null);
+    const timelineRef = useRef(null);
 
     useEffect(() => {
 
@@ -33,7 +34,7 @@ const About = () => {
             );
 
             gsap.fromTo(descRef.current,
-                { x: -100, opacity: 0 },
+                { x: -60, opacity: 0 },
                 {
                     x: 0,
                     opacity: 1,
@@ -41,7 +42,7 @@ const About = () => {
                     ease: 'power3.out',
                     scrollTrigger: {
                         trigger: imageRef.current,
-                        start: 'top 80%',
+                        start: 'top 85%',
                         toggleActions: 'play none none reverse'
                     }
                 }
@@ -64,7 +65,18 @@ const About = () => {
                 }
             })
 
-
+            // Timeline entra desde abajo
+            gsap.fromTo(timelineRef.current,
+                { y: 60, opacity: 0 },
+                {
+                    y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: timelineRef.current,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
 
             /*   document.fonts.ready.then(() => {
                   const descRefs = [desc1Ref, desc2Ref];
@@ -131,18 +143,83 @@ const About = () => {
     }, []);
 
     return (
-        <section className="about" ref={sectionRef}>
+        <section className="about section" ref={sectionRef}>
+
+            <img
+                className="image"
+                src={AboutImg}
+                ref={imageRef}
+                alt="dibujo nieves gomez"
+            />
+
+            {/* Título — igual que antes */}
             <h2 className="section-title" ref={titleRef}>Perfil Profesional</h2>
-            <div className='about__container'>
-                <div className="about__profile" ref={descRef}>
-                    <p className="about__description" >
-                        He desarrollado mi carrera combinando liderazgo operativo con capacidad analítica y formación técnica en desarrollo, aplicando una <b>mentalidad orientada a resultados</b> tanto en gestión como en programación.
-                    </p>
-                    <p className="about__description">
-                        Experiencia en la toma de <b>decisiones estratégicas</b> bajo presión, planificación, organización y <b>optimización de procesos</b> comunicación efectiva con equipos y clientes.
-                    </p></div>
-                <img className='about__image' src={AboutImg} ref={imageRef} alt="dibujo nieves gomez" />
+
+            {/* NUEVO: tarjeta oscura con los párrafos */}
+            <div className="about__desc-card" ref={descRef}>
+                <p className="about__description">
+                    He desarrollado mi carrera combinando liderazgo operativo con capacidad analítica
+                    y formación técnica en desarrollo, aplicando una{' '}
+                    <b>mentalidad orientada a resultados</b> tanto en gestión como en programación.
+                </p>
+                <p className="about__description">
+                    Experiencia en la toma de <b>decisiones estratégicas</b> bajo presión,
+                    planificación, organización y <b>optimización de procesos</b>,
+                    comunicación efectiva con equipos y clientes.
+                </p>
             </div>
+
+
+
+
+
+            {/* NUEVO: timeline a la derecha */}
+            <div className="about__timeline" ref={timelineRef}>
+
+                <div className="about__timeline-item">
+                    <span className="about__year current">Actualidad</span>
+                    <ul>
+                        <li>Máster en Desarrollo con Inteligencia Artificial
+                            <b className="about__school"> · Big School</b>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="about__timeline-item">
+                    <span className="about__year">2025</span>
+                    <ul>
+                        <li>Certificación Profesional Web Developer
+                            <b className="about__school"> · Big School</b>
+                        </li>
+                        <li>Cursos complementarios
+                            <ul className="about__sublist">  {/* 👈 ul intermedio para que sea válido */}
+                                <li><b className="about__school"> · Gestor de Sitios Web – Impulso 06</b></li>
+                                <li><b className="about__school"> · Fundamentos de C - 42 Telefónica</b></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="about__timeline-item">
+                    <span className="about__year">2023</span>
+                    <ul>
+                        <li>Certificación Profesional Web Developer
+                            <b className="about__school"> · Big School</b>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="about__timeline-item">
+                    <span className="about__year">2019</span>
+                    <ul>
+                        <li>Certificación Profesional Web Developer
+                            <b className="about__school"> · Big School</b>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
 
         </section>
     );

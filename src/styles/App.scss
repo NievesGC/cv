@@ -133,7 +133,7 @@ body {
 }
 
 .section {
-  padding: $spacing-3xl 0;
+  padding: $spacing-3xl 0;  
   position: relative;
   
   @include respond-to('tablet') {
@@ -154,6 +154,7 @@ body {
   position: relative;
   text-transform: uppercase;
   letter-spacing: 2px;
+  z-index: 2;
   
 
   @include respond-to('tablet') {
