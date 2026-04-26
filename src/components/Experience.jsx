@@ -77,7 +77,11 @@ const Experience = () => {
     { text: 'Análisis de Datos', size: 24, align: 'flex-start' },
     { text: "Resolución de Problemas", size: 26, align: "center" },
     { text: "Gestión Operativa", size: 16, align: "flex-start" },
-    { text: "Gestión Operativa", size: 30, align: "center" },
+    { text: "Gestión Operativa", size: 7, align: "center" },
+    { text: "Gestión Operativa", size: 20, align: "flex-end" },
+    { text: "Gestión Operativa", size: 10, align: "flex-start" },
+    { text: "Gestión Operativa", size: 14, align: "center" },
+    { text: "Gestión Operativa", size: 30, align: "flex-end" },
   ];
 
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
@@ -101,14 +105,13 @@ const Experience = () => {
     });
 
     document.fonts.ready.then(() => {
+      habilitiesRefs.current.forEach((spanEl, i) => {
+        if (!spanEl) return;
 
-      habilitiesRefs.current.forEach((spanEl) => {
-        if (!spanEl) return; // seguridad: si el ref está vacío, lo saltamos
-
-        // 📌 Dividimos el span en palabras individuales
+        // 📌 Creamos el split y lo GUARDAMOS en splitRefs
         const split = SplitText.create(spanEl, { type: 'words' });
+        splitRefs.current[i] = split; // 🆕 guardamos la referencia
 
-        // 📌 Preparamos el contenedor con perspectiva 3D
         gsap.set(spanEl, {
           transformPerspective: 600,
           perspective: 300,
@@ -116,41 +119,24 @@ const Experience = () => {
           autoAlpha: 1
         });
 
-        // 📌 Animación de ENTRADA — cada palabra entra desde el espacio 3D
+        // 📌 Solo animación de ENTRADA con scroll
         split.words.forEach((word, i) => {
           gsap.from(word, {
-            z: () => gsap.utils.random(-500, 300),  // profundidad aleatoria
+            z: () => gsap.utils.random(-500, 300),
             scale: 2,
             opacity: 0,
             rotationY: () => gsap.utils.random(-40, 40),
             rotationX: () => gsap.utils.random(-20, 20),
             duration: 1,
             ease: 'power3.out',
-            delay: i * 0.05, // cada palabra entra un poco después que la anterior
+            delay: i * 0.05,
             scrollTrigger: {
               trigger: spanEl,
-              start: 'top 70%',
+              start: 'top 90%',
               toggleActions: 'play none none reverse'
             },
           });
         });
-
-        // 📌 Animación de SALIDA — cuando el elemento sale del viewport
-        /*     gsap.to(split.words, {
-              z: 300,
-              scale: 0.5,
-              opacity: 0,
-              rotationY: () => gsap.utils.random(-40, 40),
-              rotationX: () => gsap.utils.random(-20, 20),
-              duration: 0.2,
-              stagger: 0.03,
-              ease: 'power2.in',
-              scrollTrigger: {
-                trigger: spanEl,
-                start: 'bottom 30%',
-                toggleActions: 'play none none reverse'
-              }
-            }); */
 
       });
     });
@@ -163,7 +149,7 @@ const Experience = () => {
     if (!el) return;
     gsap.fromTo(el,
       { opacity: 0, x: 50 },
-      { opacity: 1, x: 0, duration: 0.45, ease: 'power3.out' }
+      { opacity: 1, x: 0, duration: 0.75, ease: 'power3.out', delay: 0.4 }
     );
     gsap.fromTo(items,
       { opacity: 0, x: 14 },
@@ -172,34 +158,62 @@ const Experience = () => {
 
   };
 
-  // ── Ocultar habilidades: desaparecen y dejan de ocupar espacio ──
-  const animateHabilitiesOut = (onComplete) => {
+  // ── Anima las habilidades: 'in' para entrar, 'out' para salir ──
+  const animateHabilities = (direction, onComplete) => {
     const container = habilitiesContainerRef.current;
     if (!container) { onComplete?.(); return; }
 
-    gsap.to(split.words, {
+    if (direction === 'out') {
+      // 📌 Salida: las palabras vuelan hacia fuera en 3D
+      gsap.to(container, { display: 'block', autoAlpha: 1, duration: 0 }); // por si estaba oculto
 
+      const allWords = splitRefs.current.flatMap(split => split?.words ?? []);
+      // 🔍 flatMap junta todos los arrays de palabras en uno solo:
+      // [[palabra1, palabra2], [palabra3]] → [palabra1, palabra2, palabra3]
 
+      gsap.to(allWords, {
+        z: 300,
+        scale: 0.5,
+        opacity: 0,
+        rotationY: () => gsap.utils.random(-40, 40),
+        rotationX: () => gsap.utils.random(-20, 20),
+        duration: 0.4,
+        stagger: 0.03,
+        ease: 'power2.in',
+        onComplete: () => {
+          // ← Solo cuando terminan de salir, colapsamos el espacio
+          gsap.set(container, { display: 'none' });
+          onComplete?.();
+        }
+      });
 
+    } else {
+      // 📌 Entrada: las palabras aparecen desde el espacio 3D
+      gsap.set(container, { display: 'block', autoAlpha: 1 }); // lo hacemos visible primero
 
-      z: 300,
-      scale: 0.5,
-      opacity: 0,
-      rotationY: () => gsap.utils.random(-40, 40),
-      rotationX: () => gsap.utils.random(-20, 20),
-      
-      stagger: 0.03,
+      const allWords = splitRefs.current.flatMap(split => split?.words ?? []);
 
-      opacity: 0,
-     
-      duration: 0.35,
-      ease: 'power2.in',
-      onComplete: () => {
-        // ← Cuando termina la animación, quitamos el espacio del layout
-        gsap.set(container, { display: 'none' });
-        onComplete?.();
-      }
-    });
+      gsap.fromTo(allWords,
+        {
+          z: () => gsap.utils.random(-500, 300),
+          scale: 2,
+          opacity: 0,
+          rotationY: () => gsap.utils.random(-40, 40),
+          rotationX: () => gsap.utils.random(-20, 20),
+        },
+        {
+          z: 0,
+          scale: 1,
+          opacity: 1,
+          rotationY: 0,
+          rotationX: 0,
+          duration: 0.6,
+          stagger: 0.03,
+          ease: 'power3.out',
+          onComplete: () => onComplete?.()
+        }
+      );
+    }
   };
 
   // ── Cerrar panel ──
@@ -232,8 +246,9 @@ const Experience = () => {
         tl.to(card, {
           scale: 0.6,
           opacity: 0,
-          duration: 0.25,
+          duration: 0.6,
           ease: 'power2.in',
+          delay: 0.2,
         }, i * 0.05); // ← cada tarjeta empieza 0.05s después de la anterior
       });
     };
@@ -265,6 +280,7 @@ const Experience = () => {
                 { scale: 1, opacity: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.7)' }
               );
             });
+            animateHabilities('in');
           });
         })
 
@@ -274,6 +290,7 @@ const Experience = () => {
 
     // ── CASO 2: Primera selección (venimos del estado inicial, tarjetas en rect) ──
     if (active === null) {
+      animateHabilities('out');
       animateCardsOut(() => {
         // Solo cuando terminan de salir, React cambia el estado
         setActive(index);
@@ -286,8 +303,7 @@ const Experience = () => {
           openDetail();
         });
       });
-      animateHabilitiesOut();
-
+    
       return;
     }
 
