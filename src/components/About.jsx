@@ -14,37 +14,6 @@ const About = () => {
     const descRef = useRef(null);
 
     useEffect(() => {
-        /* 
-                // --- PERSIANAS FUERA DEL CONTEXTO ---
-                const overlay = blindOverlayRef.current;
-                const numBlinds = 20;
-                overlay.innerHTML = '';
-        
-                for (let i = 0; i < numBlinds; i++) {
-                    const blind = document.createElement('div');
-                    blind.className = 'about__blind';
-                    blind.style.width = `${100 / numBlinds}%`;
-                    blind.style.left = `${i * (100 / numBlinds)}%`;
-                    overlay.appendChild(blind);
-                }
-        
-                const blinds = overlay.querySelectorAll('.about__blind');
-        
-                const blindAnimation = gsap.fromTo(
-                    blinds,
-                    { scaleX: 1 },
-                    {
-                        scaleX: 0,
-                        stagger: { each: 0.1, ease: 'power2.inOut' },
-                        ease: 'none',
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: 'top 80%',
-                            end: 'top 30%',
-                            scrub: 1,
-                        },
-                    }
-                ); */
 
         const ctx = gsap.context(() => {
 

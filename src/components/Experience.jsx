@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 import './Experience.scss';
 import pinkstoneIcon from '../assets/images/pinkstonelogo.webp';
 import realcashIcon from '../assets/images/rc.webp';
@@ -13,8 +14,11 @@ const Experience = () => {
   const detailRef = useRef(null);
   const cardRefs = useRef([]);
   const habilitiesRefs = useRef([]);
+  const habilitiesContainerRef = useRef(null);
   const [active, setActive] = useState(null);
   const [displayed, setDisplayed] = useState(null);
+
+  const splitRefs = useRef([]);
 
   const experiences = [
     {
@@ -95,6 +99,61 @@ const Experience = () => {
 
       );
     });
+
+    document.fonts.ready.then(() => {
+
+      habilitiesRefs.current.forEach((spanEl) => {
+        if (!spanEl) return; // seguridad: si el ref está vacío, lo saltamos
+
+        // 📌 Dividimos el span en palabras individuales
+        const split = SplitText.create(spanEl, { type: 'words' });
+
+        // 📌 Preparamos el contenedor con perspectiva 3D
+        gsap.set(spanEl, {
+          transformPerspective: 600,
+          perspective: 300,
+          transformStyle: 'preserve-3d',
+          autoAlpha: 1
+        });
+
+        // 📌 Animación de ENTRADA — cada palabra entra desde el espacio 3D
+        split.words.forEach((word, i) => {
+          gsap.from(word, {
+            z: () => gsap.utils.random(-500, 300),  // profundidad aleatoria
+            scale: 2,
+            opacity: 0,
+            rotationY: () => gsap.utils.random(-40, 40),
+            rotationX: () => gsap.utils.random(-20, 20),
+            duration: 1,
+            ease: 'power3.out',
+            delay: i * 0.05, // cada palabra entra un poco después que la anterior
+            scrollTrigger: {
+              trigger: spanEl,
+              start: 'top 70%',
+              toggleActions: 'play none none reverse'
+            },
+          });
+        });
+
+        // 📌 Animación de SALIDA — cuando el elemento sale del viewport
+        /*     gsap.to(split.words, {
+              z: 300,
+              scale: 0.5,
+              opacity: 0,
+              rotationY: () => gsap.utils.random(-40, 40),
+              rotationX: () => gsap.utils.random(-20, 20),
+              duration: 0.2,
+              stagger: 0.03,
+              ease: 'power2.in',
+              scrollTrigger: {
+                trigger: spanEl,
+                start: 'bottom 30%',
+                toggleActions: 'play none none reverse'
+              }
+            }); */
+
+      });
+    });
   }, []);
 
   // ── Abrir panel de detalle ──
@@ -113,6 +172,35 @@ const Experience = () => {
 
   };
 
+  // ── Ocultar habilidades: desaparecen y dejan de ocupar espacio ──
+  const animateHabilitiesOut = (onComplete) => {
+    const container = habilitiesContainerRef.current;
+    if (!container) { onComplete?.(); return; }
+
+    gsap.to(split.words, {
+
+
+
+
+      z: 300,
+      scale: 0.5,
+      opacity: 0,
+      rotationY: () => gsap.utils.random(-40, 40),
+      rotationX: () => gsap.utils.random(-20, 20),
+      
+      stagger: 0.03,
+
+      opacity: 0,
+     
+      duration: 0.35,
+      ease: 'power2.in',
+      onComplete: () => {
+        // ← Cuando termina la animación, quitamos el espacio del layout
+        gsap.set(container, { display: 'none' });
+        onComplete?.();
+      }
+    });
+  };
 
   // ── Cerrar panel ──
   const closeDetail = (onComplete) => {
@@ -150,13 +238,7 @@ const Experience = () => {
       });
     };
 
-    const animateHabilitiesOut = (onComplete) => {
-      const tl = gsap.timeline({ onComplete });
 
-      gsap.to(habilitiesRefs.current,
-        { opacity: 0 }
-      );
-    };
 
     // ── Función: animar círculos entrando ──
     const animateCirclesIn = () => {
@@ -172,7 +254,7 @@ const Experience = () => {
     if (active === index) {
       closeDetail(() => {
         animateCardsOut(() => {
-          
+
           setActive(null);
           setDisplayed(null);
           animateBg(bgDefault);
@@ -204,6 +286,8 @@ const Experience = () => {
           openDetail();
         });
       });
+      animateHabilitiesOut();
+
       return;
     }
 
@@ -215,12 +299,13 @@ const Experience = () => {
 
     animateBg(experiences[index].color + '52');
 
-    
+
 
     closeDetail(() => {
       setActive(index);
       setDisplayed(index);
       requestAnimationFrame(openDetail);
+
     });
   };
 
@@ -282,8 +367,8 @@ const Experience = () => {
               </button>
             ))}
           </div>
-          <div className='habilities' ref={habilities}>
-            {habilities.map(({ text, size, align }) => (
+          <div className='habilities' ref={habilitiesContainerRef}>
+            {habilities.map(({ text, size, align }, i) => (
               <div
                 key={text}
                 style={{
@@ -291,7 +376,10 @@ const Experience = () => {
                   justifyContent: align,  // controla si va a izq, centro o derecha
                 }}
               >
-                <span style={{ fontSize: `${size}px` }}>
+                <span
+                  ref={(el) => (habilitiesRefs.current[i] = el)}
+                  style={{ fontSize: `${size}px` }}
+                >
                   {text}
                 </span>
               </div>
