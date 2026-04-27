@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
+
 }
 
 html {
@@ -21,7 +21,7 @@ body {
   color: $color-text-dark;
   line-height: 1.6;
   overflow-x: hidden;
-  background-color: $color-bg-light;
+  background-color: $color-bg-dark;
 }
 
 // Contenedor principal
@@ -30,13 +30,40 @@ body {
   overflow-x: hidden;
 }
 
+/* Kaleidoscope Background */
+.kaleidoscope {
+  position: fixed;
+  inset: 0;
+  background: conic-gradient(from 0deg,
+      $color-primary,
+      $color-secondary,
+      $color-tertiary,
+      $color-accent,
+      $color-primary,
+      $color-secondary,
+      $color-tertiary);
+  animation: spin 60s linear infinite;
+  filter: blur(80px) saturate(130%);
+  z-index: 0;
+  transform-origin: center center;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 
 
 // Animaciones
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-30px) rotate(5deg);
   }
@@ -46,6 +73,7 @@ body {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -56,6 +84,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -67,6 +96,7 @@ body {
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -78,6 +108,7 @@ body {
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -90,13 +121,13 @@ body {
 }
 
 .section {
-  padding: $spacing-3xl 0;  
+  padding: $spacing-3xl 0;
   position: relative;
-  
+
   @include respond-to('tablet') {
     padding: $spacing-2xl 0;
   }
-  
+
   @include respond-to('mobile') {
     padding: $spacing-xl 0;
   }
@@ -112,12 +143,12 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   z-index: 2;
-  
+
 
   @include respond-to('tablet') {
     font-size: $font-size-xl;
   }
-  
+
   @include respond-to('mobile') {
     font-size: $font-size-lg;
   }
@@ -134,23 +165,23 @@ body {
   cursor: pointer;
   border: 2px solid transparent;
   font-size: $font-size-sm;
-  
+
   &-primary {
     background-color: $color-primary;
     color: $color-text-dark;
-    
+
     &:hover {
       background-color: darken($color-primary, 10%);
       transform: translateY(-2px);
       box-shadow: $shadow-md;
     }
   }
-  
+
   &-outline {
     background-color: transparent;
     color: $color-primary;
     border-color: $color-primary;
-    
+
     &:hover {
       background-color: $color-primary;
       color: $color-text-dark;
@@ -166,7 +197,7 @@ body {
   padding: $spacing-lg;
   box-shadow: $shadow-md;
   transition: all $transition-normal;
-  
+
   &:hover {
     box-shadow: $shadow-lg;
     transform: translateY(-5px);

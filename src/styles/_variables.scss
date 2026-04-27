@@ -8,12 +8,13 @@ $color-accent: #E67E22; // Naranja acento
 $color-bg-dark: #575555;
 $color-bg-light: #ffffff;
 $color-bg-section: #f8f9fa;
-
+$color-bg-trasnsparent: transparent;
 
 // Colores de texto
 $color-text-dark: #2C3E50;
 $color-text-light: #ffffff;
 $color-text-gray: #6c757d;
+
 
 :root {
   --color-bg-dark: #{$color-bg-dark};

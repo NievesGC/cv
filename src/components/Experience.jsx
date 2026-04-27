@@ -237,7 +237,7 @@ const Experience = () => {
   // ── Click en una tarjeta / círculo ──
   const handleSelect = (index) => {
     const bgDefault = getComputedStyle(document.documentElement)
-      .getPropertyValue('--color-bg-dark').trim();
+      .getPropertyValue('--color-bg-trasnsparent').trim();
 
     // ── Función: animar tarjetas saliendo (rect → fuera) ──
     const animateCardsOut = (onComplete) => {
@@ -329,7 +329,7 @@ const Experience = () => {
   const isOpen = active !== null;
 
   return (
-    <section className="experience section" id="experience" ref={sectionRef}>
+    <section className="experience section " id="experience" ref={sectionRef}>
       <div className="container">
 
         <h2 className="section-title">Experiencia Profesional</h2>
