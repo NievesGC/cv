@@ -5,8 +5,9 @@
   position: absolute;
   bottom: 0;
   left: -250px;
-  height: 100%;
-  width: auto;
+  height: auto;
+  width: clamp(260px, 30vw, 520px);
+  max-height: 85%;
   object-fit: contain;
   object-position: bottom left;
   z-index: 1;
@@ -22,7 +23,7 @@
   min-height: 100vh;
   max-height: 120vh;
   min-width: 100vw;
-  overflow: visiblen;
+  overflow: visible;
   /* background-color: $color-primary; */
 
   /*  &__container {
@@ -135,33 +136,75 @@
     font-size: $font-size-xs;
   }
 
-  @include respond-to('desktop') {
-    &__container {
-      align-items: center; // centra verticalmente imagen y timeline
-    }
-
-    &__image {
-      width: 30%; // un poco más pequeña en pantallas grandes
-    }
-
+  @include respond-to('xwide') {
     &__timeline {
-      width: 45%; // el timeline ocupa más espacio
+      width: 45%;
     }
   }
 
-  // Animaciones
+  // Tablets y móviles grandes: la imagen deja de flotar en absoluto
+  // y todo se apila en columna para no solapar contenido.
   @include respond-to('tablet') {
-    &__item {
-      grid-template-columns: 1fr;
-      margin-bottom: 10vh;
+    min-height: auto;
+    max-height: none;
+    padding: $spacing-2xl $spacing-md;
 
-      &:nth-child(even) {
-        direction: ltr;
-      }
+    .image {
+      position: static;
+      width: 55%;
+      max-width: 280px;
+      height: auto;
+      max-height: none;
+      margin: 0 auto $spacing-lg;
+      object-position: center;
     }
 
-    &__image-wrap {
-      aspect-ratio: 16/9;
+    &__desc-card {
+      width: 90%;
+      max-width: 600px;
+      margin: $spacing-md auto;
+    }
+
+    &__timeline {
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto $spacing-lg;
+    }
+  }
+
+  @include respond-to('mobile') {
+    .image {
+      width: 65%;
+      max-width: 220px;
+    }
+
+    &__desc-card {
+      width: 100%;
+      padding: $spacing-md $spacing-lg;
+    }
+
+    &__timeline {
+      width: 100%;
+      padding: $spacing-md;
+    }
+  }
+
+  @include respond-to('mobile-sm') {
+    .image {
+      width: 70%;
+      max-width: 180px;
+    }
+
+    &__desc-card {
+      padding: $spacing-md;
+    }
+
+    &__timeline {
+      padding: $spacing-sm;
+    }
+
+    &__year {
+      min-width: 70px;
     }
   }
 }

@@ -2,7 +2,11 @@
 
 // Mixin para responsive design
 @mixin respond-to($breakpoint) {
-  @if $breakpoint == 'mobile' {
+  @if $breakpoint == 'mobile-sm' {
+    @media (max-width: $breakpoint-mobile-sm) {
+      @content;
+    }
+  } @else if $breakpoint == 'mobile' {
     @media (max-width: $breakpoint-mobile) {
       @content;
     }
@@ -16,6 +20,10 @@
     }
   } @else if $breakpoint == 'wide' {
     @media (min-width: $breakpoint-wide) {
+      @content;
+    }
+  } @else if $breakpoint == 'xwide' {
+    @media (min-width: $breakpoint-xwide) {
       @content;
     }
   }
@@ -76,13 +84,25 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 $spacing-lg;
-  
+
+  @include respond-to('wide') {
+    max-width: 1320px;
+  }
+
+  @include respond-to('xwide') {
+    max-width: 1480px;
+  }
+
   @include respond-to('tablet') {
     padding: 0 $spacing-md;
   }
-  
+
   @include respond-to('mobile') {
     padding: 0 $spacing-sm;
+  }
+
+  @include respond-to('mobile-sm') {
+    padding: 0 $spacing-xs;
   }
 }
 

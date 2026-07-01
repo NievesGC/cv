@@ -1,11 +1,20 @@
 // Colores principales - basados en el diseño proporcionado
-$color-primary: #FDB913; // Amarillo/Dorado principal
-$color-secondary: #2C3E50; // Azul oscuro/Negro
-$color-tertiary: #3A5F7D; // Azul verdoso
-$color-accent: #E67E22; // Naranja acento
+$color-primary: #727272; // Verde neón eléctrico
+$color-secondary: #393a3a; // Blanco menta brillante para títulos sobre fondo oscuro
+$color-tertiary: #ff00ff; // Negro perla oscuro (variante para degradados)
+$color-accent: #FFFFFF; // Rosa/magenta neón
+
+// Colores para kaleidoscope - para fondo en movimiento 
+$color-kaleidoscope-1: #747474;
+$color-kaleidoscope-2: #ffffff;
+$color-kaleidoscope-3: #ff29ed;
+$color-kaleidoscope-4: #00ffff;;
+$color-kaleidoscope-5: #000000;
+
+
 
 // Colores de fondo
-$color-bg-dark: #575555;
+$color-bg-dark: #616161;
 $color-bg-light: #ffffff;
 $color-bg-section: #f8f9fa;
 $color-bg-trasnsparent: transparent;
@@ -43,10 +52,12 @@ $spacing-2xl: 5rem;
 $spacing-3xl: 7rem;
 
 // Breakpoints
+$breakpoint-mobile-sm: 360px;
 $breakpoint-mobile: 480px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 1024px;
 $breakpoint-wide: 1440px;
+$breakpoint-xwide: 1920px;
 
 // Sombras
 $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);

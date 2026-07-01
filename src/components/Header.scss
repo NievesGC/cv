@@ -25,6 +25,10 @@
   padding: $spacing-sm 0;
   min-height: 70px;
 
+  @include respond-to('mobile') {
+    min-height: 56px;
+  }
+
   &__logo {
     a {
       text-decoration: none;
@@ -46,6 +50,17 @@
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
+    }
+
+    @include respond-to('mobile-sm') {
+      &-text {
+        font-size: $font-size-md;
+      }
+
+      &-subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
     }
   }
 
@@ -71,6 +86,13 @@
       &.active {
         right: 0;
       }
+    }
+
+    @include respond-to('mobile') {
+      top: 56px;
+      width: 220px;
+      height: calc(100vh - 56px);
+      padding: $spacing-lg $spacing-md;
     }
   }
 

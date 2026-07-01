@@ -8,6 +8,10 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-2xl;
+
+    @include respond-to('mobile') {
+      gap: $spacing-xl;
+    }
   }
 
   &__category {
@@ -22,6 +26,15 @@
 
       .icon {
         font-size: $font-size-2xl;
+      }
+
+      @include respond-to('mobile') {
+        font-size: $font-size-lg;
+        margin-bottom: $spacing-md;
+
+        .icon {
+          font-size: $font-size-xl;
+        }
       }
     }
 
@@ -52,6 +65,10 @@
   position: relative;
   overflow: hidden;
 
+  @include respond-to('mobile') {
+    padding: $spacing-md;
+  }
+
   &:hover {
     box-shadow: $shadow-lg;
     transform: translateY(-5px);
@@ -72,7 +89,12 @@
     height: 80px;
     margin: 0 auto $spacing-md;
     @include flex-center;
-    
+
+    @include respond-to('mobile') {
+      width: 56px;
+      height: 56px;
+    }
+
     img {
       width: 100%;
       height: 100%;
@@ -133,6 +155,11 @@
   font-size: $font-size-sm;
   transition: all $transition-normal;
   box-shadow: $shadow-sm;
+
+  @include respond-to('mobile') {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-xs;
+  }
 
   &:hover {
     background-color: $color-primary;

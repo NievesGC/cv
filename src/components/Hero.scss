@@ -30,6 +30,13 @@
     text-align: center;
     padding: $spacing-2xl 0;
 
+    @include respond-to('mobile') {
+      padding: $spacing-xl 0;
+    }
+
+    @include respond-to('mobile-sm') {
+      padding: $spacing-lg 0;
+    }
   }
 
   &__title {
@@ -46,6 +53,10 @@
 
     @include respond-to('mobile') {
       font-size: $font-size-xl;
+    }
+
+    @include respond-to('mobile-sm') {
+      font-size: $font-size-lg;
     }
 
     &-name {
@@ -186,6 +197,15 @@
         }
 
         padding: $spacing-sm;
+      }
+
+      @include respond-to('mobile-sm') {
+        padding: $spacing-xs;
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
       }
     }
   }
