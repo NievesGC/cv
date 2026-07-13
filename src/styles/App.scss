@@ -40,11 +40,13 @@ body {
       $color-kaleidoscope-3,
       $color-kaleidoscope-4,
       $color-kaleidoscope-5,
+      $color-kaleidoscope-6,
     );
-  animation: spin 90s linear infinite;
+  animation: spin 60s linear infinite;
   filter: blur(85px) saturate(130%);
   z-index: 0;
   transform-origin: center center;
+  
 }
 
 @keyframes spin {

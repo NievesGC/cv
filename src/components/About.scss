@@ -5,8 +5,9 @@
   position: absolute;
   bottom: 0;
   left: -250px;
+  top: 100px;
   height: auto;
-  width: clamp(260px, 30vw, 520px);
+  width: clamp(660px, 60vw, 520px);
   max-height: 85%;
   object-fit: contain;
   object-position: bottom left;

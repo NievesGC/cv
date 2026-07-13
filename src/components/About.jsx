@@ -170,9 +170,6 @@ const About = () => {
             </div>
 
 
-
-
-
             {/* NUEVO: timeline a la derecha */}
             <div className="about__timeline" ref={timelineRef}>
 

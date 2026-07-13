@@ -18,10 +18,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-/*     background-image: url('../assets/images/bg-hero.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; */
   }
 
   &__content {
@@ -43,7 +39,7 @@
     font-size: $font-size-3xl;
     font-weight: 900;
     margin-bottom: $spacing-md;
-    color: $color-secondary;
+    color: $color-text-dark;
     font-family: $font-secondary;
     line-height: 1.2;
 
@@ -61,7 +57,8 @@
 
     &-name {
       display: block;
-      background: linear-gradient(135deg, $color-secondary 0%, $color-primary 100%);
+      background: $color-text-light;
+      opacity: 0.7;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -71,9 +68,11 @@
   &__subtitle {
     font-size: $font-size-md;
     font-weight: 600;
-    color: $color-text-gray;
+    color: $color-text-light;
     margin-bottom: $spacing-xl;
     letter-spacing: 0.5px;
+    opacity: 0.8;
+
 
     @include respond-to('mobile') {
       font-size: $font-size-sm;
@@ -85,11 +84,12 @@
 
     .separator {
       margin: 0 $spacing-xs;
-      color: $color-primary;
+      color: $color-text-gray;
+
     }
   }
 
-  &__description {
+  /*&__description {
     font-size: $font-size-md;
     line-height: 1.8;
     color: $color-text-gray;
@@ -101,15 +101,15 @@
     @include respond-to('mobile') {
       font-size: $font-size-sm;
     }
-  }
+  }*/
 
-  &__buttons {
+  /* &__buttons {
     display: flex;
     gap: $spacing-md;
     justify-content: center;
     margin-bottom: $spacing-xl;
     flex-wrap: wrap;
-  }
+  }*/
 
   &__info {
     display: flex;
@@ -132,12 +132,11 @@
       font-size: $font-size-sm;
 
       &:hover {
-        color: $color-primary;
+        color: $color-text-light;
         transition-duration: 0.7s;
-        opacity: 0.7;
+        opacity: 0.7;      
       }
-
-
+      
       .icon {
         font-size: $font-size-lg;
       }
@@ -175,6 +174,12 @@
       svg {
         width: 20px;
         height: 20px;
+
+      }
+
+      &:hover {
+        color: $color-text-gray-dark;
+
       }
 
       .spotlight {
@@ -185,7 +190,8 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $color-primary;
+        background-color: $color-accent;
+        opacity: 0.3;
         pointer-events: none; // ← que no interfiera con los eventos del ratón
         z-index: 0;
       }

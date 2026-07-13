@@ -1,28 +1,30 @@
 // Colores principales - basados en el diseño proporcionado
-$color-primary: #727272; // Verde neón eléctrico
-$color-secondary: #393a3a; // Blanco menta brillante para títulos sobre fondo oscuro
-$color-tertiary: #ff00ff; // Negro perla oscuro (variante para degradados)
-$color-accent: #FFFFFF; // Rosa/magenta neón
+$color-primary: #8a8a8a; // Verde neón eléctrico
+$color-secondary: #1f1e1e; // Blanco menta brillante para títulos sobre fondo oscuro
+$color-tertiary: #5BC0BE; // Negro perla oscuro (variante para degradados)
+$color-accent: #fa5757; // Rosa/magenta neón
 
 // Colores para kaleidoscope - para fondo en movimiento 
-$color-kaleidoscope-1: #747474;
-$color-kaleidoscope-2: #ffffff;
-$color-kaleidoscope-3: #ff29ed;
-$color-kaleidoscope-4: #00ffff;;
-$color-kaleidoscope-5: #000000;
+$color-kaleidoscope-1: #0B132B;
+$color-kaleidoscope-2: #1C2541;
+$color-kaleidoscope-3: #3A506B;
+$color-kaleidoscope-4: #5BC0BE;
+$color-kaleidoscope-5: #525252;
+$color-kaleidoscope-6: #FF6B6B;
 
 
 
 // Colores de fondo
-$color-bg-dark: #616161;
-$color-bg-light: #ffffff;
+$color-bg-dark: #292828;
+$color-bg-light: #a3a3a3;
 $color-bg-section: #f8f9fa;
 $color-bg-trasnsparent: transparent;
 
 // Colores de texto
-$color-text-dark: #2C3E50;
-$color-text-light: #ffffff;
-$color-text-gray: #6c757d;
+$color-text-dark: #0a1825;
+$color-text-light: #fafafa;
+$color-text-gray: #929292;
+$color-text-gray-dark: #2c2c2c;
 
 
 :root {
