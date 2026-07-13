@@ -153,7 +153,7 @@ const About = () => {
             />
 
             {/* Título — igual que antes */}
-            <h2 className="section-title" ref={titleRef}>Perfil Profesional</h2>
+            <h2 className="section-title profile" ref={titleRef}>Perfil Profesional</h2>
 
             {/* NUEVO: tarjeta oscura con los párrafos */}
             <div className="about__desc-card" ref={descRef}>

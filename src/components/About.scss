@@ -4,25 +4,30 @@
 .image {
   position: absolute;
   bottom: 0;
-  left: -250px;
+  left: 180px;
   top: 100px;
   height: auto;
-  width: clamp(660px, 60vw, 520px);
-  max-height: 85%;
+  width: clamp(660px, 70vw, 820px);
+  max-height: 90%;
   object-fit: contain;
   object-position: bottom left;
   z-index: 1;
 }
 
+.profile{
+  margin-top: 8%;
+  margin-left: 8%;
+}
 .about {
-  /* padding: 10vh 10vw; */
+  
+  margin: 100px 20px;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  max-height: 120vh;
+  min-height: 90vh;
+  max-height: 90vh;
   min-width: 100vw;
   overflow: visible;
   /* background-color: $color-primary; */
@@ -64,9 +69,9 @@
     background-color: rgba(44, 62, 80, 0.88); // $color-secondary con opacidad
     border-radius: 1.2rem;
     padding: $spacing-lg $spacing-xl;
-    width: 65%;
-    max-width: 800px;
-    margin: $spacing-md 2rem $spacing-md auto;
+    width: 55%;
+    max-width: 700px;
+    margin: -2rem 22rem 0 auto;
     text-align: center;
     z-index: 2;
   }
@@ -79,7 +84,7 @@
     width: 55%;
     max-width: 700px;
     
-    margin: 0 2rem 0 auto;
+    margin: $spacing-sm 17rem $spacing-md auto;
     padding: $spacing-md;
     background-color: rgba(44, 62, 80, 0.75);
     border-radius: 1.2rem;
