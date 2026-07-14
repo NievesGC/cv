@@ -415,6 +415,14 @@ const Experience = () => {
 
 
               {/* ── Vista seleccionado ── */}
+              <button
+                type="button"
+                className="exp-detail__close"
+                onClick={() => handleSelect(active)}
+                aria-label="Cerrar detalle"
+              >
+                ✕
+              </button>
               <div className="exp-detail__header">
                 {/*              <div className="exp-detail__icon">
                   {typeof exp.icon === 'string' && !exp.icon.includes('.webp') ? (
