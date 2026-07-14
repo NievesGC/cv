@@ -17,6 +17,7 @@
 .profile{
   margin-top: 8%;
   margin-left: 8%;
+  color: $color-text-dark;
 }
 .about {
   
@@ -41,7 +42,7 @@
   }
 
   &__desc-card {
-    background-color: rgba($color-bg-light, 0.7); // $color-secondary con opacidad
+    background-color: rgba($color-bg-light, 0.6); // $color-secondary con opacidad
     border-radius: 1.2rem;
     padding: $spacing-lg $spacing-xl;
     width: 55%;
@@ -61,7 +62,7 @@
     
     margin: $spacing-sm 17rem $spacing-md auto;
     padding: $spacing-md;
-    background-color: rgba($color-bg-light, 0.7);
+    background-color: rgba($color-bg-light, 0.6);
     border-radius: 1.2rem;
     z-index: 2;
   }
@@ -80,7 +81,7 @@
       margin: 0;
 
       li {
-        color: $color-text-light;
+        color: $color-text-gray-dark;
         font-size: $font-size-sm;
         line-height: 1.8;
 
