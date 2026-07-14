@@ -77,11 +77,14 @@ const Experience = () => {
     { text: 'Análisis de Datos', size: 24, align: 'flex-start' },
     { text: "Resolución de Problemas", size: 26, align: "center" },
     { text: "Gestión Operativa", size: 16, align: "flex-start" },
-    { text: "Gestión Operativa", size: 7, align: "center" },
+    { text: "Gestión Operativa", size: 18, align: "center" },
     { text: "Gestión Operativa", size: 20, align: "flex-end" },
-    { text: "Gestión Operativa", size: 10, align: "flex-start" },
+    { text: "Gestión Operativa", size: 16, align: "flex-start" },
     { text: "Gestión Operativa", size: 14, align: "center" },
     { text: "Gestión Operativa", size: 30, align: "flex-end" },
+    { text: "Gestión Operativa", size: 20, align: "flex-start" },
+    { text: "Gestión Operativa", size: 15, align: "center" },
+
   ];
 
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
@@ -171,14 +174,13 @@ const Experience = () => {
       // 🔍 flatMap junta todos los arrays de palabras en uno solo:
       // [[palabra1, palabra2], [palabra3]] → [palabra1, palabra2, palabra3]
 
+
       gsap.to(allWords, {
-        z: 300,
+        x:0,
         scale: 0.5,
         opacity: 0,
-        rotationY: () => gsap.utils.random(-40, 40),
-        rotationX: () => gsap.utils.random(-20, 20),
-        duration: 0.4,
-        stagger: 0.03,
+        duration: 0.35,
+        stagger: 0.018,
         ease: 'power2.in',
         onComplete: () => {
           // ← Solo cuando terminan de salir, colapsamos el espacio
@@ -303,7 +305,7 @@ const Experience = () => {
           openDetail();
         });
       });
-    
+
       return;
     }
 
@@ -378,7 +380,7 @@ const Experience = () => {
                     )}
                   </div>
                   <span className="exp-card__circle-label">{ex.company}</span>
-                  <span className="exp-card__circle-period">{ex.period}</span>
+                  {/*<span className="exp-card__circle-period">{ex.period}</span>*/}
                 </div>
               </button>
             ))}

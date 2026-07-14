@@ -18,7 +18,7 @@ $color-kaleidoscope-6: #FF6B6B;
 $color-bg-dark: #292828;
 $color-bg-light: #a3a3a3;
 $color-bg-section: #f8f9fa;
-$color-bg-trasnsparent: transparent;
+$color-bg-transparent: transparent;
 
 // Colores de texto
 $color-text-dark: #0a1825;
@@ -27,9 +27,108 @@ $color-text-gray: #929292;
 $color-text-gray-dark: #2c2c2c;
 
 
+// ═══════════════════════════════════════════
+// 🌌 DEGRADADOS ESPACIALES — 10 combinaciones
+// (con colores hex directos)
+// ═══════════════════════════════════════════
+
+// 1️⃣ ESPACIO PROFUNDO — linear vertical
+$gradient-deep-space: linear-gradient(180deg,
+    #0B132B 0%, // azul casi negro (el vacío)
+    #1C2541 50%, // azul medio
+    #3A506B 100% // azul grisáceo (horizonte)
+  );
+
+// 2️⃣ AMANECER EN ÓRBITA — linear diagonal con acento cálido
+$gradient-orbit-dawn: linear-gradient(135deg,
+    #0B132B 0%,
+    #3A506B 55%,
+    #FF6B6B 100% // coral = luz del sol
+  );
+
+// 3️⃣ NEBULOSA CIAN — radial centrado
+$gradient-nebula: radial-gradient(circle at center,
+    #5BC0BE 0%, // cian brillante (núcleo)
+    #3A506B 40%,
+    #0B132B 100% // se apaga hacia el negro azulado
+  );
+
+$gradient-nebula-soft: radial-gradient(circle at center,
+    rgba(91, 192, 190, 0.5) 0%, // cian brillante (núcleo)
+    rgba(58, 80, 107, 0.5) 40%,
+    rgba(11, 19, 43, 0.5) 100% // se apaga hacia el negro azulado
+  );
+
+
+// 4️⃣ PLANETA LEJANO — radial descentrado
+$gradient-far-planet: radial-gradient(circle at 20% 15%, // la "luz" viene de arriba-izquierda
+    #5BC0BE 0%, // zona iluminada
+    #1C2541 45%,
+    #0B132B 100% // lado oscuro del planeta
+  );
+
+// 5️⃣ SUPERNOVA — radial con acento rojo
+$gradient-supernova: radial-gradient(circle at 50% 40%,
+    #fa5757 0%, // rosa neón (núcleo)
+    #FF6B6B 25%, // coral (onda expansiva)
+    #1C2541 70%,
+    #0B132B 100%);
+
+// 6️⃣ AGUJERO NEGRO — conic completo
+$gradient-black-hole: conic-gradient(from 130deg,
+    #0B132B,
+    #1C2541,
+    #3A506B,
+    #5BC0BE, // destello cian en el giro
+    #1C2541,
+    #0B132B // empieza y termina igual = sin "corte"
+  );
+
+// 7️⃣ ANILLO DE ACRECIÓN — conic descentrado
+$gradient-accretion: conic-gradient(from 45deg at 30% 70%,
+    #0B132B,
+    #3A506B,
+    #FF6B6B, // franja coral (materia caliente)
+    #1C2541,
+    #0B132B);
+
+// 8️⃣ HORIZONTE METÁLICO — linear con grises
+$gradient-hull: linear-gradient(160deg,
+    #292828 0%, // gris oscuro
+    #8a8a8a 50%, // gris medio (reflejo)
+    #2c2c2c 100% // vuelve a oscuro
+  );
+
+// 9️⃣ AURORA — linear multicolor horizontal
+$gradient-aurora: linear-gradient(90deg,
+    #5bc0be 0%, // cian
+    #5BC0BE 35%,
+    #fa5757 70%, // rosa neón
+    #FF6B6B 100% // coral
+  );
+
+// 🔟 DOBLE ESTRELLA — dos radiales + base (apilados con comas)
+$gradient-binary-stars: radial-gradient(circle at 80% 20%,
+    rgba(255, 107, 107, 0.55) 0%, // estrella coral (#FF6B6B con transparencia)
+    transparent 40%),
+  radial-gradient(circle at 15% 75%,
+    rgba(91, 192, 190, 0.5) 0%, // estrella cian (#5BC0BE con transparencia)
+    transparent 45%),
+  linear-gradient(180deg,
+    #0B132B,
+    #1C2541);
+
+
 :root {
   --color-bg-dark: #{$color-bg-dark};
 }
+
+
+// 💎 COLORES CRISTAL — translúcidos
+$color-crystal-ice: rgba(250, 250, 250, 0.12);
+$color-crystal-cyan: rgba(91, 192, 190, 0.15);
+$color-crystal-deep: rgba(28, 37, 65, 0.45);
+$color-crystal-grey: rgba(143, 143, 143, 0.45);
 
 // Tipografía
 $font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -52,6 +151,7 @@ $spacing-lg: 2rem;
 $spacing-xl: 4rem;
 $spacing-2xl: 5rem;
 $spacing-3xl: 7rem;
+$spacing-4xl: 10rem;
 
 // Breakpoints
 $breakpoint-mobile-sm: 360px;
@@ -68,6 +168,11 @@ $shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
 $shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2);
 $shadow-color-primary: 0 20px 40px #fdbb1366;
 
+// Luces y brillos
+$light-sm: 0 2px 4px rgba(255, 255, 255, 0.1);
+$light-md: 0 4px 6px rgba(255, 255, 255, 0.1);
+$light-lg: 0 10px 25px rgba(255, 255, 255, 0.15);
+$light-xl: 0 20px 40px rgba(255, 255, 255, 0.2);
 
 
 

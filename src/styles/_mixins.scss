@@ -36,34 +36,6 @@
   align-items: center;
 }
 
-// Mixin para formas geométricas (hexágonos)
-@mixin hexagon($size, $color) {
-  width: $size;
-  height: $size * 0.866;
-  background-color: $color;
-  clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
-}
-
-// Mixin para triángulos
-@mixin triangle($size, $color, $direction) {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  
-  @if $direction == 'up' {
-    border-width: 0 $size/2 $size $size/2;
-    border-color: transparent transparent $color transparent;
-  } @else if $direction == 'down' {
-    border-width: $size $size/2 0 $size/2;
-    border-color: $color transparent transparent transparent;
-  } @else if $direction == 'left' {
-    border-width: $size/2 $size $size/2 0;
-    border-color: transparent $color transparent transparent;
-  } @else if $direction == 'right' {
-    border-width: $size/2 0 $size/2 $size;
-    border-color: transparent transparent transparent $color;
-  }
-}
 
 // Mixin para sombra de texto
 @mixin text-shadow($color: rgba(0, 0, 0, 0.3)) {

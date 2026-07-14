@@ -30,7 +30,8 @@
   display: flex;
   flex-direction: flex-start;
   align-items: center;
-  gap: $spacing-2xl;
+  justify-content: center;
+
   min-height: 200px;
   transition: flex-direction 0.4s ease;
 
@@ -122,7 +123,9 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding-left: 5rem;
+  padding-left: 1rem;
+  color: rgb($color-text-light, 0.7);
+  font-weight: 600;
 
   @include respond-to('tablet') {
     padding-left: $spacing-md;
@@ -137,7 +140,7 @@
 // EXP-CARD — el elemento que hace morph de tarjeta a círculo
 // ─────────────────────────────────────────────────────────
 .exp-card {
-  --exp-color: #{$color-primary};
+  --exp-color: #{color-primary};
 
   position: relative;
   border: none;
@@ -149,26 +152,22 @@
 
   // ── Vista TARJETA (por defecto) ──
   // Forma rectangular, ancho completo
-  width: 100%;
+  width: 90%;
   border-radius: 12px;
 
-  /*  transition:
-    width       1.45s cubic-bezier(0.4, 0, 0.2, 1),
-    height      1.45s cubic-bezier(0.4, 0, 0.2, 1),
-    border-radius 1.45s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow  1.3s ease;
-   */
+
   // Contenido de la tarjeta visible, círculo oculto
   .exp-card__rect {
     display: flex;
     align-items: center;
-    gap: $spacing-md;
-    background: linear-gradient(135deg, $color-primary, 20%, darken($color-secondary, 50%));
+    //gap: $spacing-md;
+    background: $color-crystal-deep;
     border-radius: 12px;
     padding: $spacing-lg;
     box-shadow: $shadow-md;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
+
 
     @include respond-to('mobile') {
       padding: $spacing-md;
@@ -181,17 +180,17 @@
   }
 
   &:hover .exp-card__rect {
-    box-shadow: $shadow-lg;
+    box-shadow: $light-lg;
     transform: translateY(-4px);
   }
 
 
   // ── Vista CÍRCULO (cuando hay algo activo) ──
   &--circle {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background: $color-primary;
+    background: $gradient-nebula-soft;
     box-shadow:
       0 0 0 2.5px rgba(255, 255, 255, 0.06),
       0 6px 20px rgba(0, 0, 0, 0.3);
@@ -215,13 +214,17 @@
       border-radius: 50%;
       gap: 5px;
       padding: $spacing-sm;
+      transition: all 0.3s ease;
+
+      &:hover {
+        box-shadow:
+          0 0 0 1.5px var(--exp-color),
+          0 10px 28px rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+      }
     }
 
-    &:hover {
-      box-shadow:
-        0 0 0 3px var(--exp-color),
-        0 10px 28px rgba(0, 0, 0, 0.4);
-    }
+
   }
 
   // ── Círculo ACTIVO ──
@@ -234,8 +237,8 @@
 
   // ── Contenido del círculo ──
   &__circle-icon {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
     @include flex-center;
     flex-shrink: 0;
 
@@ -252,7 +255,7 @@
   }
 
   &__circle-label {
-    font-size: 0.62rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: $color-secondary;
     text-align: center;
@@ -272,9 +275,9 @@
 
   // ── Contenido de la tarjeta rectangular ──
   &__icon {
-    width: 60px;
-    height: 60px;
-    background-color: $color-bg-section;
+    width: 100px;
+    height: 100px;
+
     border-radius: 12px;
     @include flex-center;
     flex-shrink: 0;
@@ -288,7 +291,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 8px;
+      padding: 2px;
     }
 
     span {
@@ -303,8 +306,9 @@
   &__title {
     font-size: $font-size-lg;
     font-weight: 700;
-    color: $color-secondary;
+    color: rgb($color-text-light, 0.7);
     margin-bottom: $spacing-xs;
+    text-align: center;
 
     @include respond-to('mobile') {
       font-size: $font-size-md;
@@ -318,6 +322,8 @@
     font-size: $font-size-sm;
     color: $color-text-gray;
     align-items: center;
+    justify-content: center;
+
 
     .sep {
       opacity: 0.4;
@@ -327,6 +333,7 @@
   &__company {
     font-weight: 700;
     color: var(--exp-color);
+
   }
 }
 
@@ -353,8 +360,8 @@
 
   &__close {
     position: absolute;
-    top: $spacing-md;
-    right: $spacing-md;
+    top: $spacing-xl;
+    right: $spacing-4xl;
     width: 36px;
     height: 36px;
     border: none;
@@ -365,12 +372,13 @@
     line-height: 1;
     cursor: pointer;
     @include flex-center;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition: all 0.4s ease;
 
     &:hover {
       background-color: var(--exp-color);
       color: $color-bg-section;
       transform: scale(1.1);
+      box-shadow: $light-md;
     }
 
     @include respond-to('mobile') {
@@ -397,7 +405,7 @@
     width: 60px;
     height: 60px;
     border-radius: 12px;
-    background-color: $color-bg-section;
+    background-color: $color-bg-transparent;
     @include flex-center;
     flex-shrink: 0;
 
@@ -423,7 +431,7 @@
   }
 
   &__title {
-    font-size: $font-size-lg;
+    font-size: $font-size-xl;
     font-weight: 700;
     color: $color-secondary;
     margin-bottom: $spacing-xs;
@@ -438,8 +446,8 @@
     flex-wrap: wrap;
     align-items: center;
     gap: $spacing-xs;
-    font-size: $font-size-sm;
-    color: $color-text-gray;
+    font-size: $font-size-md;
+    color: $color-text-gray-dark;
 
     .sep {
       opacity: 0.4;
@@ -465,8 +473,8 @@
     align-items: flex-start;
     gap: $spacing-sm;
     line-height: 1.65;
-    color: $color-text-gray;
-    font-size: $font-size-sm;
+    color: $color-secondary;
+    font-size: $font-size-md;
   }
 
   &__bullet {

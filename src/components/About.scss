@@ -42,7 +42,7 @@
   }
 
   &__desc-card {
-    background-color: rgba($color-bg-light, 0.6); // $color-secondary con opacidad
+    background-color: $color-crystal-grey; // $color-secondary con opacidad
     border-radius: 1.2rem;
     padding: $spacing-lg $spacing-xl;
     width: 55%;
@@ -62,7 +62,7 @@
     
     margin: $spacing-sm 17rem $spacing-md auto;
     padding: $spacing-md;
-    background-color: rgba($color-bg-light, 0.6);
+    background-color: $color-crystal-grey;
     border-radius: 1.2rem;
     z-index: 2;
   }
