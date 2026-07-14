@@ -14,6 +14,8 @@ const Hero = () => {
   const buttonRef = useRef(null);
 
   useEffect(() => {
+
+    //efecto de animación para el título, subtítulo, redes sociales e información de contacto
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.fromTo(titleRef.current,
@@ -38,7 +40,8 @@ const Hero = () => {
         )
 
   }, []);
-  
+
+//efecto de animación para el spotlight en los enlaces de redes sociales
 const handleMouseMove = (evt) => {
   const link = evt.currentTarget;
   const spotlight = link.querySelector('.spotlight');
@@ -62,36 +65,6 @@ const handleMouseLeave = (evt) => {
   });
 };
 
-
-const handleInfoMouseEnter = (evt) => {
-  const item = evt.currentTarget;
-  const span = item.querySelector('span');
-  const split = new SplitText(span, { type: 'chars' });
-
-  // Guardamos el split en el elemento para poder limpiarlo después
-  item._split = split;
-
-  gsap.to(split.chars, {
-    rotateY: 360,
-    duration: 0.5,
-    ease: 'power2.out',
-    stagger: 0.04
-  });
-};
-
-const handleInfoMouseLeave = (evt) => {
-  const item = evt.currentTarget;
-  const split = item._split;
-
-  if (!split) return;
-
-  gsap.to(split.chars, {
-    rotateY: 0,
-    duration: 0.5,
-    ease: 'power2.out',
-    stagger: 0.04
-  });
-};
 
 const scrollToContact = (e) => {
   e.preventDefault();
@@ -141,7 +114,7 @@ const scrollToProjects = (e) => {
             </div>
 
             <div className="hero__info" ref={infoRef}>
-              <div className="hero__info-item" onMouseEnter={handleInfoMouseEnter} onMouseLeave={handleInfoMouseLeave}>
+              <div className="hero__info-item"  style={{ cursor: 'auto' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                   <circle cx="12" cy="9" r="2.5" />
@@ -149,13 +122,13 @@ const scrollToProjects = (e) => {
 
                 <span>Madrid</span>
               </div>
-              <div className="hero__info-item"  onMouseEnter={handleInfoMouseEnter} onMouseLeave={handleInfoMouseLeave}>
+              <div className="hero__info-item" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 <span>637 901 652</span>
               </div>
-              <div className="hero__info-item"  onMouseEnter={handleInfoMouseEnter} onMouseLeave={handleInfoMouseLeave}>
+              <div className="hero__info-item" >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="M2 7l10 7 10-7" />
