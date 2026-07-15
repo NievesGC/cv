@@ -3,7 +3,7 @@
 
 .scroll-bg {
   position: absolute;
-  inset: 0;
+  bottom: 0;
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
@@ -52,7 +52,7 @@
 
   .fade {
     pointer-events: none;
-    background: linear-gradient(90deg, $color-bg-dark, transparent 30%, transparent 70%, $color-bg-dark);
+    background: transparent;
     position: absolute;
     inset: 0;
   }

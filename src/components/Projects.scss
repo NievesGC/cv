@@ -14,9 +14,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto $spacing-2xl;
+  margin: 0 auto $spacing-sm;
   max-width: 15%;
-  min-width: 320px;
+  min-width: 370px;
   background-color: $color-crystal-deep;
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -81,7 +81,7 @@
 .projects__panels {
   display: grid;
   position: relative;
-  max-width: 1090px;
+  max-width: 1190px;
   margin: 0 auto;
 }
 
@@ -118,9 +118,8 @@
 // ═══════════════════════════════════════════
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: $spacing-lg;
   animation: projects-panel-in 0.5s ease;
   padding-bottom: $spacing-3xl;
 
@@ -180,9 +179,14 @@
       object-fit: cover;
       transition: transform $transition-normal;
     }
+
+    .svg-icon {
+      transition: transform $transition-normal;
+    }
   }
 
-  &:hover &__image img {
+  &:hover &__image img,
+  &:hover &__image .svg-icon {
     transform: scale(1.06);
   }
 

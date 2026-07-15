@@ -3,7 +3,6 @@ import Scroll from './animations/Scroll';
 import './Projects.scss';
 
 // Imágenes de proyectos (placeholders — sustituir por capturas reales de cada proyecto)
-import projectImg1 from '../assets/images/About.webp';
 import projectImg2 from '../assets/images/b1.webp';
 import projectImg3 from '../assets/images/bg-hero.png';
 import projectImg4 from '../assets/images/cv.webp';
@@ -12,6 +11,8 @@ import projectImg6 from '../assets/images/pinkstone.png';
 import projectImg7 from '../assets/images/ESLA.webp';
 import projectImg8 from '../assets/images/IFP.webp';
 import projectImg9 from '../assets/images/impulso-06.webp';
+
+import { WorkIcon, Calendar, CarIcon} from './animations/svg';
 
 // Iconos del stack tecnológico
 import htmlIcon from '../assets/images/html5.webp';
@@ -25,13 +26,13 @@ import githubIcon from '../assets/images/github-mark.webp';
 import canvaIcon from '../assets/images/canva.webp';
 import filezillaIcon from '../assets/images/firezilla.webp';
 
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE = 8;
 const STACK_PER_PAGE = 25;
 
 const projectsData = [
-  { id: 1, title: 'Proyecto 1', image: projectImg1, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 2, title: 'Proyecto 2', image: projectImg2, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 3, title: 'Proyecto 3', image: projectImg3, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 2, title: 'Proyecto 2', media: Calendar, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 3, title: 'Proyecto 3', media: CarIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 4, title: 'Proyecto 4', image: projectImg4, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 5, title: 'Proyecto 5', image: projectImg5, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 6, title: 'Proyecto 6', image: projectImg6, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
@@ -126,10 +127,11 @@ const Projects = () => {
                 if (!project) {
                   return <div key={`empty-${i}`} className="project-card project-card--empty" aria-hidden="true" />;
                 }
+                const Media = project.media;
                 return (
                   <article key={project.id} className="project-card">
                     <div className="project-card__image">
-                      <img src={project.image} alt={project.title} loading="lazy" />
+                      {Media ? <Media /> : <img src={project.image} alt={project.title} loading="lazy" />}
                     </div>
                     <h3 className="project-card__title">{project.title}</h3>
                     <p className="project-card__description">{project.description}</p>
