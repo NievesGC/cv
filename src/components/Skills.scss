@@ -3,8 +3,12 @@
 
 .skills {
   /* background-color: $color-bg-section; */
+  position: relative;
+  overflow: hidden;
 
   &__content {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     gap: $spacing-2xl;

@@ -1,0 +1,328 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.projects {
+  position: relative;
+  overflow: hidden;
+}
+
+// ═══════════════════════════════════════════
+// 🎛️ FILTRO — segmented control horizontal, centrado
+// ═══════════════════════════════════════════
+.projects__tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto $spacing-2xl;
+  max-width: 15%;
+  min-width: 320px;
+  background-color: $color-crystal-deep;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  padding: 4px;
+  box-shadow: $shadow-md;
+
+  @include respond-to('tablet') {
+    max-width: 60%;
+  }
+
+  @include respond-to('mobile') {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+.projects__tabs-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: linear-gradient(90deg, $color-primary, $color-accent);
+  border-radius: 50px;
+  transition: transform $transition-normal;
+  z-index: 0;
+
+  &--stack {
+    transform: translateX(100%);
+  }
+}
+
+.projects__tab {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: $spacing-sm $spacing-md;
+  font-size: $font-size-xs;
+  font-weight: 600;
+  color: $color-text-light;
+  white-space: nowrap;
+  border-radius: 50px;
+  transition: color $transition-normal;
+
+  &.is-active {
+    color: $color-text-dark;
+  }
+
+  @include respond-to('mobile') {
+    padding: $spacing-xs $spacing-sm;
+    font-size: 0.75rem;
+  }
+}
+
+// ═══════════════════════════════════════════
+// 🗂️ PANELES — cross-fade apilados (misma celda de grid)
+// ═══════════════════════════════════════════
+.projects__panels {
+  display: grid;
+  position: relative;
+}
+
+.projects__panel {
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  min-height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity $transition-slow, visibility $transition-slow;
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@keyframes projects-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ═══════════════════════════════════════════
+// 📁 GRID DE PROYECTOS — 2 filas x 3 columnas fijas
+// ═══════════════════════════════════════════
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: $spacing-lg;
+  animation: projects-panel-in 0.5s ease;
+  padding-bottom: $spacing-3xl;
+
+
+
+  background-color: $color-crystal-deep;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: $spacing-sm;
+
+  box-shadow: $shadow-lg;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  @include respond-to('mobile') {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+  }
+}
+
+.project-card {
+  background-color: $color-crystal-grey;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: $spacing-md;
+  margin: $spacing-sm;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $shadow-md;
+  transition: transform $transition-normal, box-shadow $transition-normal;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: $shadow-lg;
+  }
+
+  &--empty {
+    visibility: hidden;
+    box-shadow: none;
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: $spacing-sm;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform $transition-normal;
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.06);
+  }
+
+  &__title {
+    font-size: $font-size-md;
+    font-weight: 700;
+    color: $color-text-light;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__description {
+    font-size: $font-size-xs;
+    color: $color-text-light;
+    opacity: 0.8;
+    flex: 1;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    gap: $spacing-xs;
+  }
+
+  &__btn {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    padding: $spacing-xs $spacing-sm;
+    background-color: $color-primary;
+    color: $color-text-dark;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all $transition-normal;
+
+    &:hover {
+      background-color: $color-accent;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ═══════════════════════════════════════════
+// 🧰 STACK TECNOLÓGICO — panel translúcido + grid 5x5
+// ═══════════════════════════════════════════
+.stack-panel {
+  position: relative;
+  background-color: $color-crystal-deep;
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: $spacing-xl;
+  padding-bottom: $spacing-3xl;
+  box-shadow: $shadow-lg;
+}
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: $spacing-md;
+  animation: projects-panel-in 0.5s ease;
+
+  @include respond-to('tablet') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond-to('mobile') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stack-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $spacing-xs;
+  padding: $spacing-sm;
+  border-radius: 12px;
+  transition: transform $transition-normal, background-color $transition-normal;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-4px);
+  }
+
+  &__image {
+    width: 56px;
+    height: 56px;
+    @include flex-center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      transition: transform $transition-normal;
+    }
+  }
+
+  &:hover &__image img {
+    transform: scale(1.12);
+  }
+
+  &__title {
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $color-text-light;
+  }
+}
+
+// ═══════════════════════════════════════════
+// ➜ CONTROLADOR DE FLECHAS — esquina inferior derecha
+// ═══════════════════════════════════════════
+.projects__arrows {
+  position: absolute;
+  bottom: $spacing-md;
+  right: $spacing-md;
+  display: flex;
+  gap: $spacing-xs;
+}
+
+.projects__arrow {
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: $color-crystal-ice;
+  backdrop-filter: blur(8px);
+  color: $color-text-light;
+  cursor: pointer;
+  transition: all $transition-normal;
+
+  &:hover {
+    background: linear-gradient(90deg, $color-primary, $color-accent);
+    color: $color-text-dark;
+    transform: scale(1.08);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

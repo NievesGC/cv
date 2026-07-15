@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Scroll from './animations/Scroll';
 import './Skills.scss';
 
 // Importar imágenes
@@ -69,6 +70,8 @@ const Skills = () => {
 
   return (
     <section className="skills section" id="skills" ref={sectionRef}>
+      <Scroll />
+
       <div className="container">
         <h2 className="section-title">Habilidades</h2>
         
