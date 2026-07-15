@@ -81,6 +81,8 @@
 .projects__panels {
   display: grid;
   position: relative;
+  max-width: 1090px;
+  margin: 0 auto;
 }
 
 .projects__panel {
@@ -294,12 +296,12 @@
 }
 
 // ═══════════════════════════════════════════
-// ➜ CONTROLADOR DE FLECHAS — esquina inferior derecha
+// ➜ CONTROLADOR DE FLECHAS — esquina superior derecha, ligeramente fuera del panel
 // ═══════════════════════════════════════════
 .projects__arrows {
   position: absolute;
-  bottom: $spacing-md;
-  right: $spacing-md;
+  top: -$spacing-md;
+  right: -$spacing-sm;
   display: flex;
   gap: $spacing-xs;
 }

@@ -55,6 +55,7 @@ const techStackData = [
   { id: 8, title: 'Git & GitHub', image: githubIcon },
   { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
+  
 ];
 
 const chunk = (array, size) => {
