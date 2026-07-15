@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import Scroll from './animations/Scroll';
 import './Projects.scss';
 
 // Imágenes de proyectos (placeholders — sustituir por capturas reales de cada proyecto)
@@ -90,6 +91,7 @@ const Projects = () => {
 
   return (
     <section className="projects section" id="projects">
+      <Scroll />
       <div className="container">
         <h2 className="section-title">Proyectos</h2>
 
