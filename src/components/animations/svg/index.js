@@ -3,3 +3,7 @@
 export { default as WorkIcon } from './icons/WorkIcon';
 export { default as Calendar } from './icons/Calendar';
 export { default as CarIcon } from './icons/Car';
+export { default as PruebasIcon } from './icons/PruebasIcon';
+export { default as CvIcon } from './icons/CvIcon';
+export { default as CupcakeIcon } from './icons/CupcakeIcon';
+export { default as ContentIcon } from './icons/ContentIcon';

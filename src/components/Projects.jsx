@@ -12,7 +12,7 @@ import projectImg7 from '../assets/images/ESLA.webp';
 import projectImg8 from '../assets/images/IFP.webp';
 import projectImg9 from '../assets/images/impulso-06.webp';
 
-import { WorkIcon, Calendar, CarIcon} from './animations/svg';
+import { WorkIcon, Calendar, CarIcon, CvIcon, CupcakeIcon, ContentIcon, PruebasIcon} from './animations/svg';
 
 // Iconos del stack tecnológico
 import htmlIcon from '../assets/images/html5.webp';
@@ -33,12 +33,12 @@ const projectsData = [
   { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 2, title: 'Proyecto 2', media: Calendar, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 3, title: 'Proyecto 3', media: CarIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 4, title: 'Proyecto 4', image: projectImg4, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 5, title: 'Proyecto 5', image: projectImg5, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 6, title: 'Proyecto 6', image: projectImg6, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 7, title: 'Proyecto 7', image: projectImg7, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 8, title: 'Proyecto 8', image: projectImg8, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 9, title: 'Proyecto 9', image: projectImg9, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 4, title: 'Proyecto 4', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 5, title: 'Proyecto 5', media: CupcakeIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 7, title: 'Proyecto 7', media: PruebasIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 8, title: 'Proyecto 8', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 9, title: 'Proyecto 9', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
 ];
 
 const techStackData = [
