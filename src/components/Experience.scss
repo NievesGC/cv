@@ -230,9 +230,10 @@
   // ── Círculo ACTIVO ──
   &--circle#{&}--active {
     box-shadow:
-      0 0 0 3px var(--exp-color),
+      0 0 0 2px var(--exp-color,0.7),
       0 0 20px -4px var(--exp-color),
       0 10px 32px rgba(0, 0, 0, 0.45) !important;
+      transition: all 0.5s ease;
   }
 
   // ── Contenido del círculo ──
