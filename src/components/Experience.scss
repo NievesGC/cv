@@ -379,7 +379,7 @@
       background-color: var(--exp-color);
       color: $color-bg-section;
       transform: scale(1.1);
-      box-shadow: $light-md;
+      box-shadow: $light-xl;
     }
 
     @include respond-to('mobile') {

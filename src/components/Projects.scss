@@ -40,7 +40,7 @@
   left: 4px;
   width: calc(50% - 4px);
   height: calc(100% - 8px);
-  background: linear-gradient(90deg, $color-primary, $color-accent);
+  background: linear-gradient(230deg, $color-bg-section, $color-tertiary);
   border-radius: 50px;
   transition: transform $transition-normal;
   z-index: 0;
@@ -92,12 +92,14 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity $transition-slow, visibility $transition-slow;
+  transform: translateY(14px) scale(0.98);
+  transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.3s ease;
 
   &.is-active {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -118,14 +120,14 @@
 // ═══════════════════════════════════════════
 .projects__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   animation: projects-panel-in 0.5s ease;
   padding-bottom: $spacing-3xl;
 
 
 
-  background-color: $color-crystal-deep;
+  background-color: rgb($color-crystal-deep, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
@@ -151,6 +153,7 @@
   border-radius: 16px;
   padding: $spacing-md;
   margin: $spacing-sm;
+  min-width: 0; // sin esto, texto sin espacios ensancha su columna del grid y desiguala las cards
   display: flex;
   flex-direction: column;
   box-shadow: $shadow-md;
@@ -169,6 +172,7 @@
   &__image {
     width: 100%;
     aspect-ratio: 16 / 9;
+    flex-shrink: 0; // altura fija por aspect-ratio: no debe ceder espacio a la descripción
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: $spacing-sm;
@@ -195,14 +199,25 @@
     font-weight: 700;
     color: $color-text-light;
     margin-bottom: $spacing-xs;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__description {
     font-size: $font-size-xs;
     color: $color-text-light;
     opacity: 0.8;
-    flex: 1;
+    line-height: 1.5;
+    flex-shrink: 0;
+    height: 4.5em; // siempre 3 líneas exactas, ni más ni menos, independientemente del texto
+    overflow-wrap: break-word;
     margin-bottom: $spacing-sm;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__actions {
@@ -235,7 +250,7 @@
 // ═══════════════════════════════════════════
 .stack-panel {
   position: relative;
-  background-color: $color-crystal-deep;
+  background-color: rgb($color-crystal-deep, 0.75);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
@@ -323,7 +338,7 @@
   transition: all $transition-normal;
 
   &:hover {
-    background: linear-gradient(90deg, $color-primary, $color-accent);
+    background: linear-gradient(230deg, $color-bg-section, $color-tertiary);
     color: $color-text-dark;
     transform: scale(1.08);
   }

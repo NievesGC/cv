@@ -26,17 +26,17 @@ import githubIcon from '../assets/images/github-mark.webp';
 import canvaIcon from '../assets/images/canva.webp';
 import filezillaIcon from '../assets/images/firezilla.webp';
 
-const PROJECTS_PER_PAGE = 8;
+const PROJECTS_PER_PAGE = 6;
 const STACK_PER_PAGE = 25;
 
 const projectsData = [
-  { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 2, title: 'Proyecto 2', media: Calendar, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 3, title: 'Proyecto 3', media: CarIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaae este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 2, title: 'Proyecto 2', media: Calendar, description: 'Breve descbDBSDCXGBRDXhbSDGvbSDGvScripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 3, title: 'Proyecto 3', media: CarIcon, description: 'Breve descripción del proyecto. Sustituye estsgdzdfbzdGSbDcxbe texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 4, title: 'Proyecto 4', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 5, title: 'Proyecto 5', media: CupcakeIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 7, title: 'Proyecto 7', media: PruebasIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del praaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 7, title: 'Proyecto 7', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 8, title: 'Proyecto 8', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 9, title: 'Proyecto 9', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
 ];
