@@ -147,7 +147,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: $color-accent;
+        background-color: white;
         opacity: 0.7;
         pointer-events: none;
         z-index: 0;
@@ -159,7 +159,7 @@
       }
 
       @include hover-only {
-        color: $color-text-light;
+        color: $color-text-dark;
       }
 
       &:focus-visible {

@@ -27,13 +27,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer style={{
-        textAlign: 'center',
-        padding: '2rem',
-        backgroundColor: '#1a1a1a',
-        color: '#fff',
-        fontSize: '0.875rem'
-      }}>
+      <footer>
         <div className="copyright">
           <span>&copy; <span className="year">2025</span></span>
           <span>Diseñado con</span>

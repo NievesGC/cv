@@ -12,11 +12,25 @@
 }
 
 footer {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.473), transparent);
-  opacity: 0.6;
-
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.8) 8%,
+      rgba(0, 0, 0, 0.75) 19%,
+      rgba(0, 0, 0, 0.64) 34%,
+      rgba(0, 0, 0, 0.5) 47%,
+      rgba(0, 0, 0, 0.35) 56.5%,
+      rgba(0, 0, 0, 0.23) 65%,
+      rgba(0, 0, 0, 0.13) 73%,
+      rgba(0, 0, 0, 0.06) 80.6%,
+      rgba(0, 0, 0, 0.02) 87.6%,
+      rgba(0, 0, 0, 0.006) 94.3%,
+      transparent 100%);
+  opacity: 1;
+  text-align: center;
+  padding: 2rem;
   position: relative;
-  
+
+
 }
 
 .copyright {

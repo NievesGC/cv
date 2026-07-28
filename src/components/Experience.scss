@@ -58,6 +58,15 @@
 
     &--open {
       gap: $spacing-md;
+
+      // Círculos abajo, panel de detalle arriba
+      .experience__cards--side {
+        order: 2;
+      }
+
+      .exp-detail {
+        order: 1;
+      }
     }
   }
 }
@@ -209,8 +218,8 @@
       0 6px 20px rgba(0, 0, 0, 0.3);
 
     @include respond-to('mobile') {
-      width: 90px;
-      height: 90px;
+      width: 72px;
+      height: 72px;
     }
 
     .exp-card__rect {
@@ -241,6 +250,11 @@
           0 0 0 1.5px var(--exp-color),
           0 10px 28px rgba(255, 255, 255, 0.4);
         outline: none;
+      }
+
+      @include respond-to('mobile') {
+        gap: 2px;
+        padding: 0.5rem;
       }
     }
 
@@ -273,6 +287,15 @@
       font-size: 1.8rem;
       line-height: 1;
     }
+
+    @include respond-to('mobile') {
+      width: 34px;
+      height: 34px;
+
+      span {
+        font-size: 1.2rem;
+      }
+    }
   }
 
   &__circle-label {
@@ -285,6 +308,11 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    @include respond-to('mobile') {
+      font-size: 0.62rem;
+      max-width: 56px;
+    }
   }
 
   &__circle-period {
