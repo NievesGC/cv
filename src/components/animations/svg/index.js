@@ -7,3 +7,4 @@ export { default as PruebasIcon } from './icons/PruebasIcon';
 export { default as CvIcon } from './icons/CvIcon';
 export { default as CupcakeIcon } from './icons/CupcakeIcon';
 export { default as ContentIcon } from './icons/ContentIcon';
+export { default as FirualisIcon } from './icons/FirualisIcon';

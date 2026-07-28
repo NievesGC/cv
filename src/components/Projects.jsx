@@ -12,7 +12,7 @@ import projectImg7 from '../assets/images/ESLA.webp';
 import projectImg8 from '../assets/images/IFP.webp';
 import projectImg9 from '../assets/images/impulso-06.webp';
 
-import { WorkIcon, Calendar, CarIcon, CvIcon, CupcakeIcon, ContentIcon, PruebasIcon} from './animations/svg';
+import { WorkIcon, Calendar, CarIcon, CvIcon, CupcakeIcon, ContentIcon, FirualisIcon} from './animations/svg';
 
 // Iconos del stack tecnológico
 import htmlIcon from '../assets/images/html5.webp';
@@ -36,7 +36,7 @@ const projectsData = [
   { id: 4, title: 'Proyecto 4', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 5, title: 'Proyecto 5', media: CupcakeIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del praaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 7, title: 'Proyecto 7', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 7, title: 'Proyecto 7', media: FirualisIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 8, title: 'Proyecto 8', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 9, title: 'Proyecto 9', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
 ];
@@ -57,6 +57,22 @@ const techStackData = [
   { id: 8, title: 'Git & GitHub', image: githubIcon },
   { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
+  { id: 1, title: 'HTML5', image: htmlIcon },
+  { id: 2, title: 'CSS3', image: cssIcon },
+  { id: 3, title: 'JavaScript', image: jsIcon },
+  { id: 4, title: 'React', image: reactIcon },
+  { id: 5, title: 'Python', image: pythonIcon },
+  { id: 6, title: 'C', image: cIcon },
+  { id: 7, title: 'WordPress', image: wordpressIcon },
+  { id: 8, title: 'Git & GitHub', image: githubIcon },
+  { id: 9, title: 'Canva', image: canvaIcon },
+  { id: 10, title: 'FileZilla', image: filezillaIcon },
+  { id: 6, title: 'C', image: cIcon },
+  { id: 7, title: 'WordPress', image: wordpressIcon },
+  { id: 8, title: 'Git & GitHub', image: githubIcon },
+  { id: 9, title: 'Canva', image: canvaIcon },
+  { id: 10, title: 'FileZilla', image: filezillaIcon },
+  
   
 ];
 
