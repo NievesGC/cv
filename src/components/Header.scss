@@ -70,21 +70,46 @@
     gap: $spacing-lg;
     align-items: center;
 
+    // Panel deslizante en tablet/móvil: cristal oscuro translúcido,
+    // coherente con los paneles "cristal" ya usados en Proyectos
+    // ($color-crystal-deep + blur + borde blanco sutil).
     @include respond-to('tablet') {
       position: fixed;
       top: 70px;
-      right: -100%;
+      right: 0;
+      transform: translateX(100%);
       flex-direction: column;
-      background-color: $color-bg-light;
-      width: 250px;
+      align-items: stretch;
+      gap: $spacing-xs;
+      width: 260px;
       height: calc(100vh - 70px);
       padding: $spacing-xl $spacing-lg;
-      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-      transition: right $transition-normal;
-      align-items: flex-start;
+
+      background-color: rgba($color-bg-dark, 0.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-right: none;
+      // Esquinas exteriores visibles redondeadas; el borde derecho queda
+      // fuera de la pantalla, así que ese lado se mantiene recto.
+      border-radius: 20px 0 0 20px;
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.35);
+      transition: transform $transition-normal;
+
+      .nav__link {
+        display: block;
+        width: 100%;
+        color: $color-text-light;
+        padding: $spacing-sm;
+        border-radius: 10px;
+        min-height: 44px;
+
+        &:active {
+          background-color: rgba(255, 255, 255, 0.08);
+        }
+      }
 
       &.active {
-        right: 0;
+        transform: translateX(0);
       }
     }
 
@@ -111,9 +136,19 @@
     transition: all $transition-normal;
 
 
-    &:hover {
+    @include hover-only {
       color: rgb($color-text-light, 0.7);
       transform: scale(1.05);
+    }
+
+    &:focus-visible {
+      color: rgb($color-text-light, 0.7);
+      outline: 2px solid $color-primary;
+      outline-offset: 4px;
+    }
+
+    &:active {
+      color: rgb($color-text-light, 0.7);
     }
 
     @include respond-to('tablet') {
@@ -125,7 +160,11 @@
   &__toggle {
     display: none;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     gap: 5px;
+    min-width: 44px;
+    min-height: 44px;
     background: none;
     border: none;
     cursor: pointer;

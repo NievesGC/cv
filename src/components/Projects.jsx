@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import Scroll from './animations/Scroll';
 import './Projects.scss';
 
@@ -12,7 +12,7 @@ import projectImg7 from '../assets/images/ESLA.webp';
 import projectImg8 from '../assets/images/IFP.webp';
 import projectImg9 from '../assets/images/impulso-06.webp';
 
-import { WorkIcon, Calendar, CarIcon, CvIcon, CupcakeIcon, ContentIcon, FirualisIcon} from './animations/svg';
+import { WorkIcon, Calendar, CarIcon, CvIcon, CupcakeIcon, ContentIcon, FirualisIcon } from './animations/svg';
 
 // Iconos del stack tecnológico
 import htmlIcon from '../assets/images/html5.webp';
@@ -26,16 +26,16 @@ import githubIcon from '../assets/images/github-mark.webp';
 import canvaIcon from '../assets/images/canva.webp';
 import filezillaIcon from '../assets/images/firezilla.webp';
 
-const PROJECTS_PER_PAGE = 6;
-const STACK_PER_PAGE = 25;
+const PROJECTS_PER_PAGE = 3;
+const STACK_PER_PAGE = 15;
 
 const projectsData = [
-  { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaae este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 1, title: 'Proyecto 1', media: WorkIcon, description: 'Breve descripción del proyecto. Sustituyaaa aaaaaaaaaaaaaaa aaaaaaaaaaaa aae este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 2, title: 'Proyecto 2', media: Calendar, description: 'Breve descbDBSDCXGBRDXhbSDGvbSDGvScripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 3, title: 'Proyecto 3', media: CarIcon, description: 'Breve descripción del proyecto. Sustituye estsgdzdfbzdGSbDcxbe texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 4, title: 'Proyecto 4', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 5, title: 'Proyecto 5', media: CupcakeIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
-  { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del praaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
+  { id: 6, title: 'Proyecto 6', media: ContentIcon, description: 'Breve descripción del praaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaa aaaaoyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 7, title: 'Proyecto 7', media: FirualisIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 8, title: 'Proyecto 8', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
   { id: 9, title: 'Proyecto 9', media: CvIcon, description: 'Breve descripción del proyecto. Sustituye este texto por el resumen real.', links: [{ label: 'Ver Demo', href: '#' }, { label: 'Código', href: '#' }] },
@@ -52,28 +52,15 @@ const techStackData = [
   { id: 8, title: 'Git & GitHub', image: githubIcon },
   { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
-  { id: 6, title: 'C', image: cIcon },
-  { id: 7, title: 'WordPress', image: wordpressIcon },
-  { id: 8, title: 'Git & GitHub', image: githubIcon },
-  { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
-  { id: 1, title: 'HTML5', image: htmlIcon },
-  { id: 2, title: 'CSS3', image: cssIcon },
-  { id: 3, title: 'JavaScript', image: jsIcon },
-  { id: 4, title: 'React', image: reactIcon },
-  { id: 5, title: 'Python', image: pythonIcon },
-  { id: 6, title: 'C', image: cIcon },
-  { id: 7, title: 'WordPress', image: wordpressIcon },
-  { id: 8, title: 'Git & GitHub', image: githubIcon },
-  { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
-  { id: 6, title: 'C', image: cIcon },
-  { id: 7, title: 'WordPress', image: wordpressIcon },
-  { id: 8, title: 'Git & GitHub', image: githubIcon },
-  { id: 9, title: 'Canva', image: canvaIcon },
   { id: 10, title: 'FileZilla', image: filezillaIcon },
-  
-  
+  { id: 10, title: 'FileZilla', image: filezillaIcon },
+  { id: 10, title: 'FileZilla', image: filezillaIcon },
+  { id: 10, title: 'FileZilla', image: filezillaIcon },
+  { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon }, { id: 10, title: 'FileZilla', image: filezillaIcon },
+
+
 ];
 
 const chunk = (array, size) => {
@@ -101,10 +88,34 @@ const Projects = () => {
   const currentProjects = projectPages[projectsPage];
   const currentStack = stackPages[stackPage];
 
-  const goPrevProjects = () => setProjectsPage((p) => (p - 1 + projectPages.length) % projectPages.length);
-  const goNextProjects = () => setProjectsPage((p) => (p + 1) % projectPages.length);
-  const goPrevStack = () => setStackPage((p) => (p - 1 + stackPages.length) % stackPages.length);
-  const goNextStack = () => setStackPage((p) => (p + 1) % stackPages.length);
+  const tabsRef = useRef(null);
+
+  // Con las flechas abajo (tarjetas apiladas en una columna, ≤767px), tras
+  // cambiar de página hay que subir hasta el selector Proyectos/Stack: si
+  // no, el usuario se queda al pie, donde están las flechas, sin ver ni el
+  // nuevo contenido ni desde dónde puede cambiar de pestaña.
+  const scrollToTabsIfStacked = () => {
+    if (window.matchMedia('(max-width: 767px)').matches && tabsRef.current) {
+      tabsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const goPrevProjects = () => {
+    setProjectsPage((p) => (p - 1 + projectPages.length) % projectPages.length);
+    scrollToTabsIfStacked();
+  };
+  const goNextProjects = () => {
+    setProjectsPage((p) => (p + 1) % projectPages.length);
+    scrollToTabsIfStacked();
+  };
+  const goPrevStack = () => {
+    setStackPage((p) => (p - 1 + stackPages.length) % stackPages.length);
+    scrollToTabsIfStacked();
+  };
+  const goNextStack = () => {
+    setStackPage((p) => (p + 1) % stackPages.length);
+    scrollToTabsIfStacked();
+  };
 
   return (
     <section className="projects section" id="projects">
@@ -112,7 +123,7 @@ const Projects = () => {
       <div className="container">
         <h2 className="section-title">Proyectos</h2>
 
-        <div className="projects__tabs" role="tablist">
+        <div className="projects__tabs" role="tablist" ref={tabsRef}>
           <span className={`projects__tabs-indicator projects__tabs-indicator--${activeTab}`} />
           <button
             type="button"

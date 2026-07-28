@@ -10,8 +10,16 @@
     @media (max-width: $breakpoint-mobile) {
       @content;
     }
+  } @else if $breakpoint == 'mobile-lg' {
+    @media (max-width: $breakpoint-mobile-lg) {
+      @content;
+    }
   } @else if $breakpoint == 'tablet' {
     @media (max-width: $breakpoint-tablet) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet-lg' {
+    @media (max-width: $breakpoint-tablet-lg) {
       @content;
     }
   } @else if $breakpoint == 'desktop' {
@@ -24,6 +32,16 @@
     }
   } @else if $breakpoint == 'xwide' {
     @media (min-width: $breakpoint-xwide) {
+      @content;
+    }
+  }
+}
+
+// Aplica :hover solo en dispositivos con puntero preciso (ratón real),
+// evitando el hover "pegado" tras un tap en móvil/tablet táctil.
+@mixin hover-only {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
       @content;
     }
   }
@@ -52,10 +70,12 @@
 }
 
 // Mixin para contenedor principal
+// Padding lateral fluido: nunca toca el borde (mínimo 1rem) ni crece sin
+// límite en pantallas muy anchas (máximo 4rem), escalando con el viewport.
 @mixin container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 $spacing-lg;
+  padding-inline: clamp(1rem, 4vw, 4rem);
 
   @include respond-to('wide') {
     max-width: 1320px;
@@ -63,18 +83,6 @@
 
   @include respond-to('xwide') {
     max-width: 1480px;
-  }
-
-  @include respond-to('tablet') {
-    padding: 0 $spacing-md;
-  }
-
-  @include respond-to('mobile') {
-    padding: 0 $spacing-sm;
-  }
-
-  @include respond-to('mobile-sm') {
-    padding: 0 $spacing-xs;
   }
 }
 

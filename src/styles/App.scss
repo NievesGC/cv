@@ -183,11 +183,16 @@ body {
     font-size: $font-size-xs;
   }
 
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
   &-primary {
     background-color: $color-primary;
     color: $color-text-dark;
 
-    &:hover {
+    @include hover-only {
       background-color: darken($color-primary, 10%);
       transform: translateY(-2px);
       box-shadow: $shadow-md;
@@ -199,7 +204,7 @@ body {
     color: $color-primary;
     border-color: $color-primary;
 
-    &:hover {
+    @include hover-only {
       background-color: $color-primary;
       color: $color-text-dark;
       transform: translateY(-2px);
@@ -219,7 +224,7 @@ body {
     padding: $spacing-md;
   }
 
-  &:hover {
+  @include hover-only {
     box-shadow: $shadow-lg;
     transform: translateY(-5px);
   }

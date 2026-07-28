@@ -23,6 +23,9 @@
   border-radius: 50px;
   padding: 4px;
   box-shadow: $shadow-md;
+  // Al subir hasta aquí con las flechas (ver Projects.jsx), que no quede
+  // tapado bajo la cabecera fija.
+  scroll-margin-top: 90px;
 
   @include respond-to('tablet') {
     max-width: 60%;
@@ -30,6 +33,7 @@
 
   @include respond-to('mobile') {
     max-width: 100%;
+    scroll-margin-top: 76px;
     min-width: 0;
   }
 }
@@ -88,6 +92,8 @@
 .projects__panel {
   grid-area: 1 / 1 / 2 / 2;
   position: relative;
+  min-width: 0; // evita el "grid blowout": sin esto, el item de grid no
+  // encoge por debajo del min-content de su contenido y desborda .projects__panels
   min-height: 100%;
   opacity: 0;
   visibility: hidden;
@@ -121,7 +127,6 @@
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   animation: projects-panel-in 0.5s ease;
   padding-bottom: $spacing-3xl;
 
@@ -137,29 +142,30 @@
 
   @include respond-to('tablet') {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
   }
 
-  @include respond-to('mobile') {
+  // Móvil grande incluido: 2 columnas de tarjeta completa (imagen 16:9 +
+  // texto) quedan demasiado estrechas para leerse bien en un teléfono.
+  @include respond-to('mobile-lg') {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
   }
 }
 
 .project-card {
+  min-width: 0; // evita el "grid blowout": es un item de .projects__grid y
+  // por defecto no encogería por debajo del min-content de su contenido
   background-color: $color-crystal-grey;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: $spacing-md;
   margin: $spacing-sm;
-  min-width: 0; // sin esto, texto sin espacios ensancha su columna del grid y desiguala las cards
   display: flex;
   flex-direction: column;
   box-shadow: $shadow-md;
   transition: transform $transition-normal, box-shadow $transition-normal;
 
-  &:hover {
+  @include hover-only {
     transform: translateY(-6px);
     box-shadow: $shadow-lg;
   }
@@ -189,9 +195,11 @@
     }
   }
 
-  &:hover &__image img,
-  &:hover &__image .svg-icon {
-    transform: scale(1.06);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover &__image img,
+    &:hover &__image .svg-icon {
+      transform: scale(1.06);
+    }
   }
 
   &__title {
@@ -211,7 +219,6 @@
     line-height: 1.5;
     flex-shrink: 0;
     height: 4.5em; // siempre 3 líneas exactas, ni más ni menos, independientemente del texto
-    overflow-wrap: break-word;
     margin-bottom: $spacing-sm;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -234,13 +241,21 @@
     background-color: $color-primary;
     color: $color-text-dark;
     border-radius: 50px;
-    font-size: 0.75rem;
+    font-size: $font-size-xs;
     font-weight: 600;
-    transition: all $transition-normal;
+    transition: all 0.5s ease;
 
-    &:hover {
+    @include hover-only {
       background-color: $color-accent;
+      opacity: 0.7;
       transform: translateY(-2px);
+      color: $color-text-light;
+    }
+
+    &:focus-visible,
+    &:active {
+      background-color: $color-accent;
+      color: $color-text-light;
     }
   }
 }
@@ -257,6 +272,20 @@
   padding: $spacing-xl;
   padding-bottom: $spacing-3xl;
   box-shadow: $shadow-lg;
+
+  // Este panel comparte grid-area con el de proyectos (cross-fade), así que
+  // aunque esté oculto (visibility:hidden) su ancho mínimo sigue empujando
+  // la columna compartida. Sin reducir el padding aquí, en móvil/tablet
+  // ese padding fijo desbordaba todo el grid (y tapaba las flechas).
+  @include respond-to('tablet') {
+    padding: $spacing-lg;
+    padding-bottom: $spacing-2xl;
+  }
+
+  @include respond-to('mobile') {
+    padding: $spacing-md;
+    padding-bottom: $spacing-xl;
+  }
 }
 
 .stack-grid {
@@ -284,7 +313,7 @@
   border-radius: 12px;
   transition: transform $transition-normal, background-color $transition-normal;
 
-  &:hover {
+  @include hover-only {
     background-color: rgba(255, 255, 255, 0.08);
     transform: translateY(-4px);
   }
@@ -303,8 +332,10 @@
     }
   }
 
-  &:hover &__image img {
-    transform: scale(1.12);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover &__image img {
+      transform: scale(1.12);
+    }
   }
 
   &__title {
@@ -315,20 +346,33 @@
 }
 
 // ═══════════════════════════════════════════
-// ➜ CONTROLADOR DE FLECHAS — esquina superior derecha, ligeramente fuera del panel
+// ➜ CONTROLADOR DE FLECHAS — esquina superior derecha del panel
+// (pegadas al borde, nunca fuera: en pantallas estrechas el padding del
+// contenedor no deja hueco suficiente y quedaban recortadas por
+// .projects{overflow:hidden})
 // ═══════════════════════════════════════════
 .projects__arrows {
   position: absolute;
   top: -$spacing-md;
-  right: -$spacing-sm;
+  right: 0;
   display: flex;
   gap: $spacing-xs;
+
+  // Con las tarjetas apiladas en una sola columna, las flechas bajan al
+  // pie del panel y se centran en vez de quedar en la esquina superior.
+  @include respond-to('mobile-lg') {
+    top: auto;
+    right: auto;
+    bottom: $spacing-sm;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .projects__arrow {
   @include flex-center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: $color-crystal-ice;
@@ -337,10 +381,16 @@
   cursor: pointer;
   transition: all $transition-normal;
 
-  &:hover {
+  @include hover-only {
     background: linear-gradient(230deg, $color-bg-section, $color-tertiary);
     color: $color-text-dark;
     transform: scale(1.08);
+  }
+
+  &:focus-visible,
+  &:active {
+    background: linear-gradient(230deg, $color-bg-section, $color-tertiary);
+    color: $color-text-dark;
   }
 
   &:active {

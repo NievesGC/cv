@@ -103,18 +103,23 @@
     }
   }
 
-  @include respond-to('mobile') {
-    padding-left: 30px;
-
-    &::before {
-      left: 10px;
-    }
-
+  // En tablet (de cualquier tamaño) y móvil el layout ya está apilado en
+  // columna, así que los círculos se muestran en fila (con wrap) en vez de
+  // en una columna vertical.
+  @include respond-to('tablet') {
     &--side {
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: center;
       padding-left: 0;
+    }
+  }
+
+  @include respond-to('mobile') {
+    padding-left: 30px;
+
+    &::before {
+      left: 10px;
     }
   }
 }
@@ -179,9 +184,17 @@
     display: none;
   }
 
-  &:hover .exp-card__rect {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .exp-card__rect {
+      box-shadow: $light-lg;
+      transform: translateY(-4px);
+    }
+  }
+
+  &:focus-visible .exp-card__rect {
     box-shadow: $light-lg;
-    transform: translateY(-4px);
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
   }
 
 
@@ -216,11 +229,18 @@
       padding: $spacing-sm;
       transition: all 0.3s ease;
 
-      &:hover {
+      @include hover-only {
         box-shadow:
           0 0 0 1.5px var(--exp-color),
           0 10px 28px rgba(255, 255, 255, 0.4);
         transform: scale(1.05);
+      }
+
+      &:focus-visible {
+        box-shadow:
+          0 0 0 1.5px var(--exp-color),
+          0 10px 28px rgba(255, 255, 255, 0.4);
+        outline: none;
       }
     }
 
@@ -363,8 +383,8 @@
     position: absolute;
     top: $spacing-xl;
     right: $spacing-4xl;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border: none;
     border-radius: 25%;
     background-color: rgba(255, 255, 255, 0.07);
@@ -375,11 +395,17 @@
     @include flex-center;
     transition: all 0.4s ease;
 
-    &:hover {
+    @include hover-only {
       background-color: var(--exp-color);
       color: $color-bg-section;
       transform: scale(1.1);
       box-shadow: $light-xl;
+    }
+
+    &:focus-visible,
+    &:active {
+      background-color: var(--exp-color);
+      color: $color-bg-section;
     }
 
     @include respond-to('mobile') {

@@ -129,19 +129,21 @@ $color-crystal-ice: rgba(250, 250, 250, 0.12);
 $color-crystal-cyan: rgba(91, 192, 190, 0.15);
 $color-crystal-deep: rgba(28, 37, 65, 0.45);
 $color-crystal-grey: rgba(143, 143, 143, 0.45);
+$color-crystal-black: rgba(0, 0, 0, 0.8);
 
 // Tipografía
 $font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 $font-secondary: 'Montserrat', 'Arial', sans-serif;
 
-// Tamaños de fuente
-$font-size-xs: 0.875rem;
-$font-size-sm: 1rem;
-$font-size-md: 1.125rem;
-$font-size-lg: 1.5rem;
-$font-size-xl: 2rem;
-$font-size-2xl: 2.5rem;
-$font-size-3xl: 3.5rem;
+// Tamaños de fuente — fluidos (clamp: mínimo en móvil pequeño ~360px,
+// techo alcanzado ya en tablet/laptop, sin crecer más allá en monitores grandes)
+$font-size-xs: clamp(0.8rem, 0.76rem + 0.2vw, 0.875rem);
+$font-size-sm: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+$font-size-md: clamp(1rem, 0.94rem + 0.3vw, 1.125rem);
+$font-size-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+$font-size-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+$font-size-2xl: clamp(1.75rem, 1.35rem + 2vw, 2.5rem);
+$font-size-3xl: clamp(2.25rem, 1.5rem + 3.75vw, 3.5rem);
 
 // Espaciados
 $spacing-xs: 0.5rem;
@@ -153,13 +155,24 @@ $spacing-2xl: 5rem;
 $spacing-3xl: 7rem;
 $spacing-4xl: 10rem;
 
-// Breakpoints
+// Breakpoints (mobile-first en intención, expresados como cortes "hasta X"
+// salvo desktop/wide/xwide que son "a partir de X")
+// ≤360   móvil pequeño     → mobile-sm
+// ≤480   móvil mediano     → mobile
+// ≤767   móvil grande      → mobile-lg
+// ≤1024  tablet pequeña    → tablet
+// ≤1280  tablet grande     → tablet-lg
+// 1281–1536 portátil / monitor pequeño → sin query (estilos base)
+// ≥1537  monitor grande    → wide
+// ≥1921  4K / TV           → xwide
 $breakpoint-mobile-sm: 360px;
 $breakpoint-mobile: 480px;
-$breakpoint-tablet: 768px;
+$breakpoint-mobile-lg: 767px;
+$breakpoint-tablet: 1024px;
+$breakpoint-tablet-lg: 1280px;
 $breakpoint-desktop: 1024px;
-$breakpoint-wide: 1440px;
-$breakpoint-xwide: 1920px;
+$breakpoint-wide: 1537px;
+$breakpoint-xwide: 1921px;
 
 // Sombras
 $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);

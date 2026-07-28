@@ -1,30 +1,44 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+/*ESTILO FOOTER*/
+@keyframes heartbeat {
 
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  0%,
+  100% {
+    transform: scale(1)
   }
-  to {
-    transform: rotate(360deg);
+
+  50% {
+    transform: scale(1.2)
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+footer {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.473), transparent);
+  opacity: 0.6;
+
+  position: relative;
+  
 }
 
-.card {
-  padding: 2em;
+.copyright {
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 16px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap
 }
 
-.read-the-docs {
-  color: #888;
+.copyright .heart {
+  color: #ffffff;
+  font-size: 18px;
+  animation: heartbeat 2s ease-in-out infinite
+}
+
+.year {
+  color: #ffffff;
+  font-weight: 700
 }

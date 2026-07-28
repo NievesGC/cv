@@ -5,12 +5,13 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import './styles/App.scss';
+import './App.css';
 
 function App() {
   return (
     <div className="app">
 
-    {/* 🎨 Fondo kaleidoscopio — capa decorativa detrás de todo */}
+      {/* 🎨 Fondo kaleidoscopio — capa decorativa detrás de todo */}
       <div className="kaleidoscope"></div>
 
       {/* Navegación */}
@@ -26,19 +27,23 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer style={{ 
-        textAlign: 'center', 
-        padding: '2rem', 
-        backgroundColor: '#1a1a1a', 
+      <footer style={{
+        textAlign: 'center',
+        padding: '2rem',
+        backgroundColor: '#1a1a1a',
         color: '#fff',
         fontSize: '0.875rem'
       }}>
-        <p>© 2025 Nieves Gómez Carrasco - Todos los derechos reservados</p>
-        <p style={{ marginTop: '0.5rem', opacity: 0.7 }}>
-          Hecho con React, Vite, GSAP y Sass ❤️
-        </p>
-      </footer>
-    </div>
+        <div className="copyright">
+          <span>&copy; <span className="year">2025</span></span>
+          <span>Diseñado con</span>
+          <span className="heart">&hearts;</span>
+          <span>por Nieves Gómez</span>
+          <span>– Todos los derechos reservados</span>
+        </div>
+
+      </footer >
+    </div >
   );
 }
 

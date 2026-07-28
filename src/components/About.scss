@@ -1,11 +1,20 @@
 @import '../styles/variables';
 @import '../styles/mixins';
 
+// Offset de la imagen flotante en el tramo laptop+ (≥1281, sin query propia).
+// Se comparte con las tarjetas de texto para que su posición se calcule
+// SIEMPRE a partir del borde derecho real de la imagen (offset + ancho máximo,
+// 820px = 51.25rem) y así nunca se solapen, escalen juntas con el viewport.
+$about-img-left: clamp(8.5rem, 1.25rem + 9.4vw, 13rem);
+$about-img-top: clamp(5.5rem, 3.1rem + 3.1vw, 7rem);
+$about-img-max-width: 51.25rem; // 820px, techo de .image (ver clamp de abajo)
+$about-text-offset: calc(#{$about-img-left} + #{$about-img-max-width} + 2rem);
+
 .image {
   position: absolute;
   bottom: 0;
-  left: 180px;
-  top: 100px;
+  left: $about-img-left;
+  top: $about-img-top;
   height: auto;
   width: clamp(660px, 70vw, 820px);
   max-height: 90%;
@@ -29,7 +38,6 @@
   justify-content: center;
   min-height: 90vh;
   max-height: 90vh;
-  min-width: 100vw;
   overflow: visible;
 
 
@@ -45,9 +53,12 @@
     background-color: $color-crystal-grey; // $color-secondary con opacidad
     border-radius: 1.2rem;
     padding: $spacing-lg $spacing-xl;
-    width: 55%;
-    max-width: 700px;
-    margin: -2rem 22rem 0 auto;
+    // Ancho = espacio realmente disponible a la derecha de la imagen
+    // (nunca puede desbordar, se calcula con el mismo offset que la posición)
+    width: calc(100% - #{$about-text-offset} - 2rem);
+    min-width: 260px;
+    max-width: 620px;
+    margin: -2rem auto $spacing-md $about-text-offset;
     text-align: center;
     z-index: 2;
   }
@@ -57,10 +68,13 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-md;
-    width: 55%;
-    max-width: 700px;
-    
-    margin: $spacing-sm 17rem $spacing-md auto;
+    // Ancho = espacio realmente disponible a la derecha de la imagen
+    // (nunca puede desbordar, se calcula con el mismo offset que la posición)
+    width: calc(100% - #{$about-text-offset} - 2rem);
+    min-width: 260px;
+    max-width: 620px;
+
+    margin: 0 auto $spacing-md $about-text-offset;
     padding: $spacing-md;
     background-color: $color-crystal-grey;
     border-radius: 1.2rem;
@@ -118,15 +132,17 @@
     font-size: $font-size-xs;
   }
 
+  // En monitores muy grandes / TV, el conjunto no se dispersa sin límite:
+  // se centra dentro de un ancho máximo (los offsets de arriba, basados en
+  // clamp(), ya dejan de crecer bastante antes de este tramo).
   @include respond-to('xwide') {
-    &__timeline {
-      width: 45%;
-    }
+    max-width: 1800px;
+    margin-inline: auto;
   }
 
-  // Tablets y móviles grandes: la imagen deja de flotar en absoluto
-  // y todo se apila en columna para no solapar contenido.
-  @include respond-to('tablet') {
+  // Tablets (pequeñas y grandes) y móviles grandes: la imagen deja de flotar
+  // en absoluto y todo se apila en columna para no solapar contenido.
+  @include respond-to('tablet-lg') {
     min-height: auto;
     max-height: none;
     padding: $spacing-2xl $spacing-md;
