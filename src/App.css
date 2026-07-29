@@ -13,17 +13,17 @@
 
 footer {
   background: linear-gradient(180deg,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.8) 8%,
-      rgba(0, 0, 0, 0.75) 19%,
-      rgba(0, 0, 0, 0.64) 34%,
-      rgba(0, 0, 0, 0.5) 47%,
-      rgba(0, 0, 0, 0.35) 56.5%,
-      rgba(0, 0, 0, 0.23) 65%,
-      rgba(0, 0, 0, 0.13) 73%,
-      rgba(0, 0, 0, 0.06) 80.6%,
-      rgba(0, 0, 0, 0.02) 87.6%,
-      rgba(0, 0, 0, 0.006) 94.3%,
+      rgba(var(--color-ink-rgb), 0.8) 0%,
+      rgba(var(--color-ink-rgb), 0.8) 8%,
+      rgba(var(--color-ink-rgb), 0.75) 19%,
+      rgba(var(--color-ink-rgb), 0.64) 34%,
+      rgba(var(--color-ink-rgb), 0.5) 47%,
+      rgba(var(--color-ink-rgb), 0.35) 56.5%,
+      rgba(var(--color-ink-rgb), 0.23) 65%,
+      rgba(var(--color-ink-rgb), 0.13) 73%,
+      rgba(var(--color-ink-rgb), 0.06) 80.6%,
+      rgba(var(--color-ink-rgb), 0.02) 87.6%,
+      rgba(var(--color-ink-rgb), 0.006) 94.3%,
       transparent 100%);
   opacity: 1;
   text-align: center;
@@ -36,7 +36,7 @@ footer {
 .copyright {
   font-family: "Montserrat Alternates", sans-serif;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-text-light);
   font-size: 16px;
   opacity: 0.9;
   display: flex;
@@ -47,12 +47,12 @@ footer {
 }
 
 .copyright .heart {
-  color: #ffffff;
+  color: var(--color-text-light);
   font-size: 18px;
   animation: heartbeat 2s ease-in-out infinite
 }
 
 .year {
-  color: #ffffff;
+  color: var(--color-text-light);
   font-weight: 700
 }

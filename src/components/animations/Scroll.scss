@@ -36,9 +36,9 @@
     display: flex;
     align-items: center;
     gap: 0 0.2rem;
-    color: #e2e8f0;
+    color: $color-text-light;
     font-size: 0.9rem;
-    background-color: #334155;
+    background-color: $palette-2;
     border-radius: 0.4rem;
     padding: 0.7rem 1rem;
     margin-right: 1rem;
@@ -46,7 +46,7 @@
 
     span {
       font-size: 1.2rem;
-      color: #64748b;
+      color: $color-text-gray;
     }
   }
 

@@ -1,30 +1,47 @@
-// Colores principales - basados en el diseño proporcionado
-$color-primary: #8a8a8a; // Verde neón eléctrico
-$color-secondary: #1f1e1e; // Blanco menta brillante para títulos sobre fondo oscuro
-$color-tertiary: #5BC0BE; // Negro perla oscuro (variante para degradados)
-$color-accent: #fa5757; // Rosa/magenta neón
+@use 'sass:color';
 
-// Colores para kaleidoscope - para fondo en movimiento 
-$color-kaleidoscope-1: #0B132B;
-$color-kaleidoscope-2: #1C2541;
-$color-kaleidoscope-3: #3A506B;
-$color-kaleidoscope-4: #5BC0BE;
-$color-kaleidoscope-5: #525252;
-$color-kaleidoscope-6: #FF6B6B;
+// ═══════════════════════════════════════════
+// 🎨 PALETA — paleta "atardecer" (crema → azul noche), ordenada de oscuro a claro
+// por luminosidad relativa (WCAG), igual que la paleta anterior
+// ═══════════════════════════════════════════
+$palette-1: #023047; // el más oscuro (azul noche)
+$palette-2: #219EBC; // azul-verdoso medio
+$palette-3: #FB8500; // naranja vivo
+$palette-4: #FFB703; // ámbar
+$palette-5: #FFF3E0; // el más claro (crema)
+
+// $color-ink ya no necesita ser más oscuro que $palette-1: con esta paleta,
+// $palette-1 como texto sobre $color-primary da 5.6:1 (AA), así que basta
+// con alias-arlo al tono más oscuro de la paleta.
+$color-ink: $palette-1;
+
+// Colores principales
+$color-primary: $palette-3; // interactivo/CTA — botones, enlaces, foco
+$color-secondary: $palette-5; // texto/títulos sobre fondo oscuro o transparente (ver aviso en el resumen)
+$color-tertiary: $palette-4; // tono suave para degradados y fondos secundarios
+$color-accent: $palette-1; // énfasis fuerte — CTA, bordes, indicadores
+
+// Colores para kaleidoscope - para fondo en movimiento
+$color-kaleidoscope-1: $palette-1;
+$color-kaleidoscope-2: $palette-2;
+$color-kaleidoscope-3: $palette-3;
+$color-kaleidoscope-4: $palette-4;
+$color-kaleidoscope-5: $palette-2;
+$color-kaleidoscope-6: $palette-5;
 
 
 
 // Colores de fondo
-$color-bg-dark: #292828;
-$color-bg-light: #a3a3a3;
-$color-bg-section: #f8f9fa;
+$color-bg-dark: $palette-1;
+$color-bg-light: $palette-4;
+$color-bg-section: $palette-5;
 $color-bg-transparent: transparent;
 
 // Colores de texto
-$color-text-dark: #0a1825;
-$color-text-light: #fafafa;
-$color-text-gray: #929292;
-$color-text-gray-dark: #2c2c2c;
+$color-text-dark: $color-ink;
+$color-text-light: $palette-5;
+$color-text-gray: $palette-4;
+$color-text-gray-dark: $color-ink;
 
 
 // ═══════════════════════════════════════════
@@ -34,102 +51,109 @@ $color-text-gray-dark: #2c2c2c;
 
 // 1️⃣ ESPACIO PROFUNDO — linear vertical
 $gradient-deep-space: linear-gradient(180deg,
-    #0B132B 0%, // azul casi negro (el vacío)
-    #1C2541 50%, // azul medio
-    #3A506B 100% // azul grisáceo (horizonte)
+    $palette-1 0%, // azul casi negro (el vacío)
+    $palette-2 50%, // azul medio
+    $palette-3 100% // naranja cálido (horizonte)
   );
 
 // 2️⃣ AMANECER EN ÓRBITA — linear diagonal con acento cálido
 $gradient-orbit-dawn: linear-gradient(135deg,
-    #0B132B 0%,
-    #3A506B 55%,
-    #FF6B6B 100% // coral = luz del sol
+    $palette-1 0%,
+    $palette-3 55%,
+    $palette-5 100% // claro = luz del sol
   );
 
-// 3️⃣ NEBULOSA CIAN — radial centrado
+// 3️⃣ NEBULOSA — radial centrado
 $gradient-nebula: radial-gradient(circle at center,
-    #5BC0BE 0%, // cian brillante (núcleo)
-    #3A506B 40%,
-    #0B132B 100% // se apaga hacia el negro azulado
+    $palette-4 0%, // núcleo claro
+    $palette-3 40%,
+    $palette-1 100% // se apaga hacia el azul marino
   );
 
 $gradient-nebula-soft: radial-gradient(circle at center,
-    rgba(91, 192, 190, 0.5) 0%, // cian brillante (núcleo)
-    rgba(58, 80, 107, 0.5) 40%,
-    rgba(11, 19, 43, 0.5) 100% // se apaga hacia el negro azulado
+    rgba($palette-4, 0.5) 0%, // núcleo claro
+    rgba($palette-3, 0.5) 40%,
+    rgba($palette-1, 0.5) 100% // se apaga hacia el azul noche
   );
 
 
 // 4️⃣ PLANETA LEJANO — radial descentrado
 $gradient-far-planet: radial-gradient(circle at 20% 15%, // la "luz" viene de arriba-izquierda
-    #5BC0BE 0%, // zona iluminada
-    #1C2541 45%,
-    #0B132B 100% // lado oscuro del planeta
+    $palette-4 0%, // zona iluminada
+    $palette-2 45%,
+    $palette-1 100% // lado oscuro del planeta
   );
 
-// 5️⃣ SUPERNOVA — radial con acento rojo
+// 5️⃣ SUPERNOVA — radial con acento claro
 $gradient-supernova: radial-gradient(circle at 50% 40%,
-    #fa5757 0%, // rosa neón (núcleo)
-    #FF6B6B 25%, // coral (onda expansiva)
-    #1C2541 70%,
-    #0B132B 100%);
+    $palette-1 0%, // núcleo
+    $palette-5 25%, // onda expansiva
+    $palette-2 70%,
+    $palette-1 100%);
 
 // 6️⃣ AGUJERO NEGRO — conic completo
 $gradient-black-hole: conic-gradient(from 130deg,
-    #0B132B,
-    #1C2541,
-    #3A506B,
-    #5BC0BE, // destello cian en el giro
-    #1C2541,
-    #0B132B // empieza y termina igual = sin "corte"
+    $palette-1,
+    $palette-2,
+    $palette-3,
+    $palette-4, // destello claro en el giro
+    $palette-2,
+    $palette-1 // empieza y termina igual = sin "corte"
   );
 
 // 7️⃣ ANILLO DE ACRECIÓN — conic descentrado
 $gradient-accretion: conic-gradient(from 45deg at 30% 70%,
-    #0B132B,
-    #3A506B,
-    #FF6B6B, // franja coral (materia caliente)
-    #1C2541,
-    #0B132B);
+    $palette-1,
+    $palette-3,
+    $palette-5, // franja clara (materia caliente)
+    $palette-2,
+    $palette-1);
 
-// 8️⃣ HORIZONTE METÁLICO — linear con grises
+// 8️⃣ HORIZONTE METÁLICO — linear con azules
 $gradient-hull: linear-gradient(160deg,
-    #292828 0%, // gris oscuro
-    #8a8a8a 50%, // gris medio (reflejo)
-    #2c2c2c 100% // vuelve a oscuro
+    $palette-1 0%, // oscuro
+    $palette-3 50%, // medio (reflejo)
+    $palette-2 100% // vuelve a oscuro
   );
 
 // 9️⃣ AURORA — linear multicolor horizontal
 $gradient-aurora: linear-gradient(90deg,
-    #5bc0be 0%, // cian
-    #5BC0BE 35%,
-    #fa5757 70%, // rosa neón
-    #FF6B6B 100% // coral
+    $palette-4 0%,
+    $palette-4 35%,
+    $palette-1 70%,
+    $palette-5 100%
   );
 
 // 🔟 DOBLE ESTRELLA — dos radiales + base (apilados con comas)
 $gradient-binary-stars: radial-gradient(circle at 80% 20%,
-    rgba(255, 107, 107, 0.55) 0%, // estrella coral (#FF6B6B con transparencia)
+    rgba(255, 255, 255, 0.55) 0%, // estrella clara (blanco puro con transparencia)
     transparent 40%),
   radial-gradient(circle at 15% 75%,
-    rgba(91, 192, 190, 0.5) 0%, // estrella cian (#5BC0BE con transparencia)
+    rgba($palette-4, 0.5) 0%, // estrella clara secundaria (ámbar con transparencia)
     transparent 45%),
   linear-gradient(180deg,
-    #0B132B,
-    #1C2541);
+    $palette-1,
+    $palette-2);
 
 
 :root {
   --color-bg-dark: #{$color-bg-dark};
+  --color-text-light: #{$color-text-light};
+  // Componentes RGB del ink oscuro, para poder montar rgba() con alpha
+  // variable en CSS plano (p. ej. src/App.css) sin duplicar el valor hex.
+  // Calculados a partir de $color-ink para no duplicar el hex a mano.
+  --color-ink-rgb: #{color.channel($color-ink, "red")}, #{color.channel($color-ink, "green")}, #{color.channel($color-ink, "blue")};
 }
 
 
 // 💎 COLORES CRISTAL — translúcidos
-$color-crystal-ice: rgba(250, 250, 250, 0.12);
-$color-crystal-cyan: rgba(91, 192, 190, 0.15);
-$color-crystal-deep: rgba(28, 37, 65, 0.45);
-$color-crystal-grey: rgba(143, 143, 143, 0.45);
-$color-crystal-black: rgba(0, 0, 0, 0.8);
+$color-crystal-ice: rgba(255, 255, 255, 0.12);
+$color-crystal-cyan: rgba($palette-2, 0.15);
+$color-crystal-deep: rgba($palette-2, 0.45);
+// palette-5 (crema) y no palette-4 (ámbar): esta superficie lleva texto
+// oscuro encima (ver About.scss) y necesita quedar clara para mantener AA.
+$color-crystal-grey: rgba($palette-5, 0.45);
+$color-crystal-black: rgba($palette-1, 0.8);
 
 // Tipografía
 $font-primary: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -179,7 +203,7 @@ $shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
 $shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
 $shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
 $shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.3);
-$shadow-color-primary: 0 20px 40px #fdbb1366;
+$shadow-color-primary: 0 20px 40px rgba($palette-3, 0.4);
 
 // Luces y brillos
 $light-sm: 0 2px 4px rgba(255, 255, 255, 0.1);

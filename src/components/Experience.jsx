@@ -27,7 +27,7 @@ const Experience = () => {
       period: '2025 – Presente',
       location: 'Madrid',
       icon: '💼',
-      color: '#a78bfa',
+      color: '#6C96C8', // tono intermedio añadido a la paleta, ver resumen de cambios
       achievements: [
         'Desarrollo integral de proyectos web para emprendedores y pequeñas empresas',
         'Diseño y desarrollo de sitios web responsive con HTML5, CSS3, JavaScript y React',
@@ -42,7 +42,7 @@ const Experience = () => {
       period: '2026 (Prácticas)',
       location: 'Madrid',
       icon: pinkstoneIcon,
-      color: '#f472b6',
+      color: '#e85dec',
       achievements: [
         'Desarrollo de soluciones web corporativas con foco en conversión',
         'Implementación y personalización de WordPress y PrestaShop',
@@ -56,7 +56,7 @@ const Experience = () => {
       period: '2016 – 2023',
       location: 'Madrid',
       icon: realcashIcon,
-      color: '#dd650f',
+      color: '#ff6702',
       achievements: [
         'Liderazgo de equipo de 5 personas con responsabilidad en formación y desarrollo',
         'Gestión de operaciones anuales de hasta €3M',
