@@ -9,7 +9,7 @@
 // aquí a propósito y no tomados de _variables.scss.
 .svg-icon {
   --svg-icon-fill: #ffffff;
-  --svg-icon-stroke: #000000;
+  --svg-icon-stroke: #{$color-ink};
   --svg-icon-size: 70%;
 }
 // ══════════════════════════════════════════════════════════════════

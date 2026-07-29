@@ -33,7 +33,7 @@
     font-size: $font-size-xl;
     font-weight: 700;
     margin-bottom: $spacing-md;
-    color: $color-primary;
+    color: $color-primary-bright;
   }
 
   &__description {
@@ -132,7 +132,7 @@
       overflow: hidden;
       padding: $spacing-sm $spacing-lg;
       background-color: $color-primary;
-      color: $color-text-dark;
+      color: $color-text-on-primary;
       text-decoration: none;
       border-radius: 50px;
       font-weight: 600;
@@ -164,7 +164,7 @@
       }
 
       @include hover-only {
-        color: $color-text-dark;
+        color: $color-text-on-primary;
       }
 
       &:focus-visible {
@@ -235,7 +235,7 @@
     h4 {
       font-size: $font-size-lg;
       font-weight: 700;
-      color: $color-primary;
+      color: $color-primary-bright;
       margin: 0;
     }
   }
@@ -291,7 +291,7 @@
     align-self: flex-start;
     padding: $spacing-sm $spacing-lg;
     background-color: $color-primary;
-    color: $color-text-dark;
+    color: $color-text-on-primary;
     border: none;
     text-decoration: none;
     border-radius: 50px;

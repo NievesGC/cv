@@ -197,7 +197,7 @@ body {
 
   &-primary {
     background-color: $color-primary;
-    color: $color-text-dark;
+    color: $color-text-on-primary;
 
     @include hover-only {
       background-color: color.adjust($color-primary, $lightness: -10%);
@@ -208,12 +208,12 @@ body {
 
   &-outline {
     background-color: transparent;
-    color: $color-primary;
+    color: $color-primary-bright;
     border-color: $color-primary;
 
     @include hover-only {
       background-color: $color-primary;
-      color: $color-text-dark;
+      color: $color-text-on-primary;
       transform: translateY(-2px);
     }
   }

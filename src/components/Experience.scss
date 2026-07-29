@@ -533,7 +533,7 @@
 
   &__company {
     font-weight: 700;
-    color: var(--exp-color);
+    color: $color-primary-bright;
   }
 
   &__achievements {
@@ -555,7 +555,7 @@
   }
 
   &__bullet {
-    color: var(--exp-color);
+    color: $color-primary-bright;
     font-weight: bold;
     font-size: $font-size-md;
     flex-shrink: 0;
