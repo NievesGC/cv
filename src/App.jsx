@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -7,7 +10,24 @@ import Contact from './components/Contact';
 import './styles/App.scss';
 import './App.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
+  // Las secciones calculan sus posiciones de scroll (ScrollTrigger) tan
+  // pronto se montan, pero las imágenes pueden seguir cargando y cambiar el
+  // alto real de la página después. Sin este refresco, eso deja huecos o
+  // animaciones que nunca llegan a dispararse.
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+
+    if (document.readyState === 'complete') {
+      refresh();
+    } else {
+      window.addEventListener('load', refresh);
+      return () => window.removeEventListener('load', refresh);
+    }
+  }, []);
+
   return (
     <div className="app">
 

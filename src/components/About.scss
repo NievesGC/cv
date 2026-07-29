@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
 // Offset de la imagen flotante en el tramo laptop+ (≥1281, sin query propia).
 // Se comparte con las tarjetas de texto para que su posición se calcule

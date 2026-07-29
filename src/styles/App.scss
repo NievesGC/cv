@@ -1,5 +1,6 @@
-@import './variables';
-@import './mixins';
+@use 'sass:color';
+@use './variables' as *;
+@use './mixins' as *;
 
 // Import Google Fonts
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&family=Montserrat:wght@400;600;700&display=swap');
@@ -44,15 +45,21 @@ body {
       $color-kaleidoscope-6,
     );
   animation: spin 60s linear infinite;
-  filter: blur(85px) saturate(130%);
+  // Radios de blur grandes hacen que algunos navegadores aproximen el
+  // gaussiano con varias pasadas / downsample, lo que se ve como un anillo
+  // alrededor del centro. Pedimos un blur más pequeño y lo compensamos
+  // escalando el elemento (el filtro se aplica antes que el transform, así
+  // que el resultado ya difuminado se estira 1.9x = suavidad equivalente
+  // a ~85px sin pedirle al navegador ese radio tan grande).
+  filter: blur(45px) saturate(130%);
   z-index: 0;
   transform-origin: center center;
-  
+  transform: scale(1.9);
 }
 
 @keyframes spin {
   to {
-    transform: rotate(360deg);
+    transform: scale(1.9) rotate(360deg);
   }
 }
 
@@ -193,7 +200,7 @@ body {
     color: $color-text-dark;
 
     @include hover-only {
-      background-color: darken($color-primary, 10%);
+      background-color: color.adjust($color-primary, $lightness: -10%);
       transform: translateY(-2px);
       box-shadow: $shadow-md;
     }

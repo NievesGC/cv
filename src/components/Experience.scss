@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
 // ─────────────────────────────────────────────────────────
 // SECTION
@@ -14,6 +14,18 @@
   height: 300px;
   opacity: 0.3;
   filter: drop-shadow(15px 15px 15px rgba(0, 0, 0, 0.5));
+  // Es puramente decorativa: sin esto, al estar posicionada absolute dentro
+  // de .exp-detail puede solaparse sobre los círculos de abajo en mobile
+  // (el panel queda order:1 y los círculos order:2) y capturar sus clicks,
+  // dejando la X como único modo de cerrar/cambiar de círculo.
+  pointer-events: none;
+
+  @include respond-to('mobile') {
+    width: 160px;
+    height: 160px;
+    right: 10px;
+    bottom: 10px;
+  }
 }
 
 .experience {
@@ -141,12 +153,22 @@
   color: rgb($color-text-light, 0.7);
   font-weight: 600;
 
+  span {
+    font-size: var(--hab-size);
+  }
+
   @include respond-to('tablet') {
     padding-left: $spacing-md;
   }
 
   @include respond-to('mobile') {
     padding-left: $spacing-sm;
+
+    // Escalamos hacia abajo los tamaños aleatorios en vez de fijarlos,
+    // así se conserva el efecto arremolinado pero ocupa menos espacio.
+    span {
+      font-size: calc(var(--hab-size) * 0.6);
+    }
   }
 }
 

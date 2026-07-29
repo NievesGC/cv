@@ -1,5 +1,5 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
 /* .gradient {
   background: linear-gradient(135deg, rgba(black, 0.1) 0%, rgba($color-tertiary, 0.05) 100%);

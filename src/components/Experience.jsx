@@ -65,6 +65,7 @@ const Experience = () => {
         'Gestión de relaciones con clientes en situaciones complejas',
       ],
     },
+    
 
   ];
 
@@ -89,60 +90,78 @@ const Experience = () => {
 
   // ── Entrada inicial de las tarjetas con ScrollTrigger ──
   useEffect(() => {
-    cardRefs.current.forEach((el) => {
-      gsap.fromTo(el,
-        {
-          opacity: 0,
-          x: 100,
-        }
-        , {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%',
-            end: 'top 30%',
-            scrub: 1
-          }, opacity: 1, x: 0
-        }
+    let cancelled = false;
 
-      );
-    });
+    const ctx = gsap.context(() => {
+      cardRefs.current.forEach((el) => {
+        gsap.fromTo(el,
+          {
+            opacity: 0,
+            x: 100,
+          }
+          , {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              end: 'top 30%',
+              scrub: 1
+            }, opacity: 1, x: 0
+          }
+
+        );
+      });
+    }, sectionRef);
 
     document.fonts.ready.then(() => {
-      habilitiesRefs.current.forEach((spanEl, i) => {
-        if (!spanEl) return;
+      // El efecto pudo desmontarse (o volver a montarse en StrictMode) antes
+      // de que las fuentes terminaran de cargar; sin esta guarda se creaban
+      // SplitText/ScrollTriggers huérfanos sobre nodos ya desmontados.
+      if (cancelled) return;
 
-        // 📌 Creamos el split y lo GUARDAMOS en splitRefs
-        const split = SplitText.create(spanEl, { type: 'words' });
-        splitRefs.current[i] = split; // 🆕 guardamos la referencia
+      ctx.add(() => {
+        habilitiesRefs.current.forEach((spanEl, i) => {
+          if (!spanEl) return;
 
-        gsap.set(spanEl, {
-          transformPerspective: 600,
-          perspective: 300,
-          transformStyle: 'preserve-3d',
-          autoAlpha: 1
-        });
+          // 📌 Creamos el split y lo GUARDAMOS en splitRefs
+          const split = SplitText.create(spanEl, { type: 'words' });
+          splitRefs.current[i] = split; // 🆕 guardamos la referencia
 
-        // 📌 Solo animación de ENTRADA con scroll
-        split.words.forEach((word, i) => {
-          gsap.from(word, {
-            z: () => gsap.utils.random(-500, 300),
-            scale: 2,
-            opacity: 0,
-            rotationY: () => gsap.utils.random(-40, 40),
-            rotationX: () => gsap.utils.random(-20, 20),
-            duration: 1,
-            ease: 'power3.out',
-            delay: i * 0.05,
-            scrollTrigger: {
-              trigger: spanEl,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse'
-            },
+          gsap.set(spanEl, {
+            transformPerspective: 600,
+            perspective: 300,
+            transformStyle: 'preserve-3d',
+            autoAlpha: 1
           });
-        });
 
+          // 📌 Solo animación de ENTRADA con scroll
+          split.words.forEach((word, i) => {
+            gsap.from(word, {
+              z: () => gsap.utils.random(-500, 300),
+              scale: 2,
+              opacity: 0,
+              rotationY: () => gsap.utils.random(-40, 40),
+              rotationX: () => gsap.utils.random(-20, 20),
+              duration: 1,
+              ease: 'power3.out',
+              delay: i * 0.05,
+              scrollTrigger: {
+                trigger: spanEl,
+                start: 'top 90%',
+                toggleActions: 'play none none reverse'
+              },
+            });
+          });
+
+        });
       });
     });
+
+    // Limpieza al desmontar/remontar: mata tweens, ScrollTriggers y los
+    // SplitText creados dentro del contexto (incluidos los del bloque async).
+    return () => {
+      cancelled = true;
+      ctx.revert();
+    };
   }, []);
 
   // ── Abrir panel de detalle ──
@@ -396,7 +415,7 @@ const Experience = () => {
               >
                 <span
                   ref={(el) => (habilitiesRefs.current[i] = el)}
-                  style={{ fontSize: `${size}px` }}
+                  style={{ '--hab-size': `${size}px` }}
                 >
                   {text}
                 </span>

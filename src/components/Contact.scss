@@ -1,5 +1,6 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@use 'sass:color';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
 .contact {
   background: $color-crystal-black;
@@ -9,7 +10,7 @@
     color: $color-text-light;
 
     &::after {
-      background: linear-gradient(90deg, $color-primary, $color-accent); 
+      background: linear-gradient(90deg, $color-primary, $color-accent);
     }
   }
 
@@ -47,6 +48,10 @@
     flex-direction: column;
     gap: $spacing-md;
     margin-bottom: $spacing-xl;
+
+    @include respond-to('mobile') {
+      align-items: center;
+    }
   }
 
   &__item {
@@ -297,14 +302,14 @@
     box-shadow: $shadow-md;
 
     @include hover-only {
-      background-color: lighten($color-primary, 10%);
+      background-color: color.adjust($color-primary, $lightness: 10%);
       transform: translateY(-3px);
       box-shadow: $shadow-lg;
     }
 
     &:focus-visible,
     &:active {
-      background-color: lighten($color-primary, 10%);
+      background-color: color.adjust($color-primary, $lightness: 10%);
     }
   }
 }

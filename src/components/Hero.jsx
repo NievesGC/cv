@@ -15,29 +15,35 @@ const Hero = () => {
 
   useEffect(() => {
 
-    //efecto de animación para el título, subtítulo, redes sociales e información de contacto
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const ctx = gsap.context(() => {
+      //efecto de animación para el título, subtítulo, redes sociales e información de contacto
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.fromTo(titleRef.current,
-      { opacity: 0, y: -60 },
-      { opacity: 1, y: 80, duration: 1.2, ease: 'power4.out' }
-    )
-      .fromTo(subtitleRef.current,
-        { opacity: 0, y: 80, x: -60 },
-        { opacity: 1, y: 80, x: 0, duration: 1.2, ease: 'power4.out' }
-        , '<')
+      tl.fromTo(titleRef.current,
+        { opacity: 0, y: -60 },
+        { opacity: 1, y: 80, duration: 1.2, ease: 'power4.out' }
+      )
+        .fromTo(subtitleRef.current,
+          { opacity: 0, y: 80, x: -60 },
+          { opacity: 1, y: 80, x: 0, duration: 1.2, ease: 'power4.out' }
+          , '<')
 
-      .fromTo(socialRef.current,
-        { opacity: 0, y: 150, scale: 0 },
-        { opacity: 1, y: 200 ,scale: 1, duration: 1, ease: 'power1.out' }
-        , '<'
-        )
+        .fromTo(socialRef.current,
+          { opacity: 0, y: 150, scale: 0 },
+          { opacity: 1, y: 200 ,scale: 1, duration: 1, ease: 'power1.out' }
+          , '<'
+          )
 
-      .fromTo(infoRef.current,
-        { opacity: 0, y: 350, x : 150 },
-        { opacity: 1, y: 350 , x: 0, duration: 0.6, ease: 'power1.out' }
-        , '<'
-        )
+        .fromTo(infoRef.current,
+          { opacity: 0, y: 350, x : 150 },
+          { opacity: 1, y: 350 , x: 0, duration: 0.6, ease: 'power1.out' }
+          , '<'
+          )
+    }, heroRef);
+
+    // Limpieza al desmontar/remontar (React.StrictMode monta los efectos dos
+    // veces en desarrollo; sin esto la timeline quedaba duplicada/huérfana).
+    return () => ctx.revert();
 
   }, []);
 
